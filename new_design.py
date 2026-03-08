@@ -553,7 +553,7 @@ def academic_router(query, kb_df):
         })
 
     synth_prompt = f"""
-    You are an academic assistant.
+    You are an academic assistant.  Present the answer in neat format for each topic.
 
     Question:
     {query}
@@ -570,7 +570,6 @@ def academic_router(query, kb_df):
     Instructions:
     - Answer each topic with its specific intent only
     - Do not hallucinate information not present in the data
-    - Structure response clearly per topic
     - Do not add extra information beyond what is asked
     """
 
