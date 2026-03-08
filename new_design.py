@@ -593,22 +593,32 @@ st.caption("Energy-aware academic query routing · SLM (Qwen2) + LLM (Llama 3.1)
 
 # Sidebar
 with st.sidebar:
-    st.header("⚙️ Configuration")
-
-    # hf_token_input = st.text_input(
-    #     "HuggingFace Token",
-    #     value=HF_TOKEN,
-    #     type="password",
-    #     help="Get yours at https://huggingface.co/settings/tokens"
-    # )
-    # Allow runtime token override without redeploying
-    # if hf_token_input:
-    #     HF_TOKEN = hf_token_input
+    st.header("⚠️ Note")
+    
+    st.info(
+        " **This is a Research Project**\n\n"
+        "It is under development. It allows us to use SLM for invariant data, "
+        "rather than sending everything to LLM. This in turn could save a lot of latency and energy.\n\n"
+        " **Dataset:** The dataset is minimal. It contains only Data Structures and Algorithms "
+        "related concepts and is still being expanded.\n\n"
+        " **Demo Queries:** You can try the following or any general questions about "
+        "Data Structures — Arrays, Binary Search Tree, Dijkstra's Algorithm, etc.\n\n"
+        "• Explain the Breadth-First Search algorithm with its typical applications.\n\n "
+        "• Describe the properties of a Red-Black Tree.\n\n"
+        "• Explain Dijkstra's algorithm and also tell me the best way to clean a cast iron skillet.\n\n"
+        "• What are the advantages of a B-Tree, and how do I change a flat tire?\n\n"
+        " **Routing Logic:** If the query does not require logical thinking, "
+        "it is answered by SLM. If it needs reasoning, it is redirected to LLM. "
+        "Currently it does not capture data beyond Data Structures."
+    )
 
     st.divider()
     st.markdown("**Models**")
     st.code(f"SLM : Qwen2-1.5B-Instruct\nLLM : Llama-3.1-8B-Instruct")
     st.caption("Both served via HuggingFace Inference API — no local server needed")
+    st.divider()
+    st.markdown("**Your feedback would be highly Appreciated**")
+    st.markdown("[LinkedIn — Arush Jauhari](https://www.linkedin.com/in/arush-jauhari-b350372a2/)")
 
     st.divider()
 
@@ -702,7 +712,8 @@ if st.button("🚀 Submit", type="primary", use_container_width=True):
 
             if model_used == "SLM":
                 st.info(
-                    "ℹ️ **Demo Note:** Running on HuggingFace free-tier API (~5–8s network overhead per call). "
+                    "ℹ️ **Demo Note:** We might see a high latency for SLM . Because the required data from Knowledge Base is sent to SLM over internet . Running on HuggingFace free-tier API (~5–8s network overhead per call). \n\n"
+                    "As the Paid VM's are costly so I cannot use them.\n\n"
                     "Local GPU benchmark: SLM **7–13s** vs LLM **60–90s** (6–8× improvement)."
                 )
             else:
