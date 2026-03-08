@@ -1,0 +1,7 @@
+streamlit
+pandas
+requests
+thefuzz
+python-Levenshtein
+nltk
+openai

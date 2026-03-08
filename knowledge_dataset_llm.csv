@@ -1,0 +1,1547 @@
+heading,aliases,domain,definition,advantages,disadvantages,applications,code,extras
+Array,"['One-dimensional list', 'Indexed collection', 'Ordered sequence']",Data Structures,"A data structure consisting of a collection of elements, each identified by an index or key, allowing for efficient storage and retrieval of elements in a fixed-size, ordered manner.","['Supports random access and indexing', 'Efficient insertion and deletion of elements at arbitrary positions', 'Allows for duplicate elements', 'Space-efficient for sparse data', 'Simple implementation']","['Fixed-size array can lead to wasted space if not filled completely', 'Insertion and deletion can be slow for large arrays', 'Not suitable for unstructured or dynamic data']","['Database indexing and sorting', 'Compiler symbol tables', 'Memory management and caching', 'Scientific computing and numerical analysis', 'Game development and graphics rendering']","#include <stdio.h>
+
+int main() {
+	// Initialize an array of size 5 with default values
+	int arr[5] = {1, 2, 3, 4, 5};
+	printf(""Default array: "");
+	for (int i = 0; i < 5; i++) printf(""%d"", arr[i]);
+	puts("""");
+
+	// Access an element by its index
+	printf(""Element at index 2: %d\n"", arr[2]);
+
+	// Update an element
+	arr[0] = 10;
+	printf(""Updated array: "");
+	for (int i = 0; i < 5; i++) printf(""%d"", arr[i]);
+	puts("""");
+
+	return 0;
+}",[]
+Binary Tree,"['Binary Tree Data Structure', '2-3 Tree', 'Ordered Binary Tree']",Data Structures,"A binary tree is a data structure in which each node has at most two children, referred to as the left child and the right child. Each node represents a key-value pair, where the key is used for sorting purposes, and the value can be any type of data.","['Efficient search, insertion, and deletion operations can be performed in O(log n) time', 'Allows for efficient sorting and ordering of elements', 'Can be used to represent hierarchical relationships between data', 'Supports dynamic set operations such as union, intersection, and difference', 'Can be easily traversed using various algorithms like pre-order, post-order, and in-order traversal']","['Requires more memory compared to other tree-based data structures due to the overhead of each node', 'Insertion and deletion operations can become unbalanced if not implemented properly', 'Can be slow for very large datasets due to the logarithmic time complexity of search operations']","['Database indexing and querying', 'File system organization and management', 'Compiler design and optimization', 'Graph algorithms and network analysis', 'XML document parsing and validation']","struct Node { int data; struct Node* left; struct Node* right; }; void insertNode(struct Node** root, int key) { if (*root == NULL) *root = newNode(key); else if (key < (*root)->data) insertNode(&(*root)->left, key); else if (key > (*root)->data) insertNode(&(*root)->right, key); } struct Node* newNode(int key) { struct Node* node = (struct Node*)malloc(sizeof(struct Node)); node->data = key; node->left = NULL; node->right = NULL; return node; }",[]
+Binary Search Tree,"['BST', 'Binary Tree', 'Search Tree']",Data Structures,"A Binary Search Tree is a binary tree data structure in which each node has at most two children (i.e., left child and right child) and for any given node, all elements in the left subtree are less than the current node's value, while all elements in the right subtree are greater.","['Supports efficient search, insert, and delete operations with an average time complexity of O(log n), making it suitable for large datasets.', 'Maintains a balance between the left and right subtrees, ensuring that the tree remains roughly balanced during insertion and deletion.', 'Permits efficient traversal and access to nodes using in-order, pre-order, or post-order traversal techniques.', ""Allows for efficient storage of sorted data, as each node's value is greater than its left child's value and less than its right child's value."", 'Supports range queries and nearest neighbor searches with optimal performance.', 'Can be used to implement a set or multiset data structure with O(log n) time complexity for operations like union, intersection, and difference.']","['Insertion and deletion can cause the tree to become unbalanced if not performed correctly, leading to poor performance.', 'Rebalancing the tree after insertion or deletion can be expensive in terms of time and space.', 'Requires a specific ordering of nodes during construction and traversal, which can be error-prone.', 'May not be suitable for datasets with a large number of duplicate values, as this can lead to an imbalance in the tree.', 'Can be difficult to implement correctly, especially when dealing with edge cases like insertion or deletion of identical values.']","['Database indexing: Binary Search Trees are used to index database records for efficient retrieval and storage.', 'File system management: BSTs can be employed to manage file systems and optimize directory access times.', 'Scientific computing: They find applications in scientific simulations, data analysis, and visualization.', 'Game development: BSTs can be utilized in game engines to improve AI decision-making and pathfinding algorithms.', 'Web search engines: Binary Search Trees are used for efficient indexing and querying of web pages.']","typedef struct node{ int data; struct node *left, *right;} Node;
+int main(){
+Node* root = NULL;
+// Insertion example
+insert(root, 5);
+insert(root, 3);
+insert(root, 7);
+
+// Traversal example
+inorder(root); // In-order traversal: left-root-right
+}
+define void insert(Node** node, int value){
+if (*node == NULL) {
+*node = createNode(value);
+} else {
+if (value < (*node)->data)
+insert(&(*node)->left, value);
+else if (value > (*node)->data)
+insert(&(*node)->right, value);
+}
+define Node* createNode(int data){
+Node* node = (Node*)malloc(sizeof(Node));
+node->data = data;
+node->left = node->right = NULL;
+return node;}",[]
+Heap,"['Priority Queue', 'Max Heap', 'Min Heap', 'Binary Heap']",Data Structures,"A heap is a specialized tree-based data structure that satisfies the heap property. The heap property states that for any given node I, if the child nodes exist, their values are either greater than or less than the value in the parent node (depending on whether it's a max or min heap). This unique property makes heaps efficient for tasks such as sorting and priority queuing.","['Efficient insertion and deletion of elements at the end', 'Supports heap operations like heapify, insert, delete, extract-min/max', 'Can be used to implement priority queues efficiently', 'Has a space complexity of O(n), where n is the number of nodes', 'The height of the tree can grow up to log(n) in the worst case for a max/min heap with n elements', 'Supports the heap property, which makes it efficient for sorting and priority queuing', 'Can be used as an auxiliary data structure to help in more complex operations', 'Has good locality of reference when implemented properly', 'Allows for efficient searching, inserting, and deleting nodes', 'Can be implemented using arrays or linked lists']","['The time complexity of heapify is O(n) in the worst case', 'Insertion and deletion operations at other positions can be slow due to shifting elements', 'Requires a specific implementation (e.g., array, linked list, binary tree) for optimal performance', 'Has high overhead for handling edge cases like empty heaps or single-element heaps', 'May not provide a direct advantage over balanced trees in all scenarios', 'Can be inefficient if the heap size is very small due to its property', 'Does not inherently support arbitrary-range queries', 'Insertion and deletion at arbitrary positions can lead to shifting of many elements, making it slow', 'Inefficient for operations like search, insert, delete for multiple positions simultaneously', 'May incur a cost for maintaining the heap property']","['Implementation of priority queues in operating systems for process scheduling', ""Use in Dijkstra's algorithm for finding shortest paths from source to all other vertices"", 'Heapsort as an efficient sorting algorithm with average and worst-case time complexity of O(n log n)', 'Binary heaps used in the implementation of graph algorithms like topological sorting, depth-first search (DFS), breadth-first search (BFS)', 'Use of max heap for finding the maximum value among a set of values', 'Min heap implementation in Huffman coding for creating prefix codes', 'Heaps utilized in priority queuing systems for assigning priorities to tasks based on urgency', 'A min-heap can be used to efficiently implement the A\th* algorithm (A* pathfinding) for finding shortest paths', 'Max heap can find the maximum value among all elements in an array or linked list in O(log n) time complexity', 'Use of binary heap data structure to optimize merge sort and selection algorithms']","int arr[10]; // example array
+void heapify(int arr[], int i, int n){
+	// rearrange the array elements as a maxheap
+	int largest = i;
+	int left = 2*i + 1;
+	int right = 2*i + 2;
+	if (left < n && arr[left] > arr[largest]){
+		next_largest = left;
+	}else {
+		next_largest = largest;
+	}
+	if (right < n && arr[right] > arr[next_largest]){
+		next_largest = right;
+	}
+	if(next_largest != largest){
+		int temp = arr[largest];
+		arr[largest] = arr[next_largest];
+		arr[next_largest] = temp;
+		heapify(arr, next_largest, n);
+	}
+	}
+void build_max_heap(int arr[], int n){
+	for (int i = n / 2 - 1; i >= 0; --i) {
+		heapify(arr, i, n);
+	}
+}
+void print_array(int arr[], int n){
+	printf(""Maximum element is %d\n"", arr[0]);
+}
+int main(){
+	int arr[] = {12, 11, 13, 5, 6, 7};
+	int n = sizeof(arr) / sizeof(arr[0]);
+	build_max_heap(arr, n);
+	print_array(arr, n);
+	return 0;
+}",[]
+Merge Sort,"['Merging Algorithm', 'Divide and Conquer Sorting', 'Efficient Sorting Technique']",Algorithms,"Merge sort is a divide-and-conquer algorithm that splits an input list into two halves, recursively sorts each half, and then merges the two sorted halves back together in a single sorted output.","['Efficient for large datasets', 'Has a time complexity of O(n log n)', 'Stable sorting algorithm', 'Easy to implement', 'In-place sorting is not guaranteed']","['Requires extra memory for temporary storage during merge process', 'Not suitable for small input sizes due to overhead of recursive calls']","['Sorting large datasets in big data analytics', 'Efficient sorting in databases and file systems', 'Algorithms in graph theory and computational geometry', 'Sorting in numerical methods and scientific computing']","void mergeSort(int arr[], int left, int right) {
+	if (left < right) {
+		int mid = left + (right - left) / 2;
+		mergeSort(arr, left, mid);
+		mergeSort(arr, mid + 1, right);
+		merge(arr, left, mid, right);
+	}
+} 
+void merge(int arr[], int left, int mid, int right) {
+	int n1 = mid - left + 1;
+	int n2 = right - mid;
+	int[] temp1 = new int[n1];
+	int[] temp2 = new int[n2];
+	for (int i = 0; i < n1; ++i) temp1[i] = arr[left + i];
+	for (int j = 0; j < n2; ++j) temp2[j] = arr[mid + 1 + j];
+	int i = 0, j = 0, k = left;
+	p while (i < n1 && j < n2) {
+		if (temp1[i] <= temp2[j]) {
+			arr[k++] = temp1[i++];
+		} else {
+			arr[k++] = temp2[j++];
+		}
+	}
+	while (i < n1) arr[k++] = temp1[i++];
+	while (j < n2) arr[k++] = temp2[j++];
+}",[]
+Quick Sort,"['Quicksort', 'Partition-Select Algorithm', 'Lomuto Partition Scheme']",Algorithms,"A divide-and-conquer algorithm that picks an element as pivot and partitions the given array around the picked pivot. The partition scheme divides the array into two subarrays, elements less than the pivot and elements greater than the pivot. Recursively apply the same process to each subarray.","['Efficient for large datasets due to its average time complexity of O(n log n)', 'In-place sorting algorithm', 'Stable sorting algorithm when using a suitable partition scheme', 'Adaptable to different types of data and can handle duplicate elements', 'Parallelizable, making it efficient on multi-core processors', ""Suitable for external sorting, where the entire dataset doesn't fit in memory""]","['Worst-case time complexity of O(n^2)', 'Sensitivity to initial pivot choice can lead to poor performance', 'Requires extra space for recursive call stack or partitioning', 'Not suitable for nearly sorted arrays, as it performs poorly in the worst case']","['General-purpose sorting of large datasets', 'Database query optimization and indexing', 'File system organization and searching', 'Scientific computing and data analysis', 'Data compression and encryption algorithms', 'Compiler design and code optimization']","#include <stdio.h>
+#include <stdlib.h>
+
+void swap(int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+int partition(int arr[], int low, int high) {
+	int pivot = arr[high];
+	int i = low - 1;
+
+	for (int j = low; j < high; j++) {
+		if (arr[j] <= pivot) {
+			i++;
+			swap(&arr[i], &arr[j]);
+		}
+	}
+	swap(&arr[i + 1], &arr[high]);
+	return i + 1;
+}
+
+void quickSort(int arr[], int low, int high) {
+	if (low < high) {
+		int pivot = partition(arr, low, high);
+		quickSort(arr, low, pivot - 1);
+		quickSort(arr, pivot + 1, high);
+	}
+}
+
+void printArray(int arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		printf(""%d "", arr[i]);
+	}
+	puts("""");
+}
+
+int main() {
+	int arr[] = {5, 2, 8, 1, 9};
+	int size = sizeof(arr) / sizeof(arr[0]);
+	quickSort(arr, 0, size - 1);
+	printArray(arr, size);
+	return 0;
+}","Time Complexity : Best / Average case : O(n logn) , Worst : O(n^2) . Space Complexity - average-case and best-case space complexity of 
+ due to the recursive call stack. In the worst-case scenario, the space complexity can degrade to 
+ if the recursion tree becomes skewed (e.g., already sorted array)"
+Linked List,"['dynamic array', 'chain-based list', 'sequential access list']",Data Structures,"A linked list is a linear data structure where each element, called a node, contains a value and a reference (i.e., a link) to the next node in the sequence. This allows for efficient insertion and deletion of nodes at any position in the list.","['Efficient dynamic memory allocation', 'Fast insertion and deletion of elements', 'Allows for implementation of advanced data structures like stacks and queues', 'Can be used to implement recursive algorithms iteratively', 'Supports efficient searching and sorting', 'Flexible and adaptable to changing requirements', 'Uses less memory than arrays for sparse or irregularly structured data', 'Easy to implement and understand', 'Supports efficient concatenation of lists']","['Slow access times due to sequential traversal', 'Limited support for random access operations', 'Can be prone to memory leaks if not implemented carefully', 'May lead to inefficient use of memory if not properly managed', 'Requires extra overhead for node management and linking', 'May experience performance issues with large datasets', 'Can be challenging to implement certain algorithms like sorting and searching', 'Supports limited operations like insertion, deletion, and search']","['Implementing stacks and queues for expression evaluation and parsing', 'Representing graphs and trees in computer science', 'Storing and traversing large datasets with varying lengths', 'Efficiently managing dynamic memory allocation in operating systems', 'Supporting recursive algorithms like tree traversal and merge sort', 'Building hash tables and dictionaries using linked lists', 'Simulating real-world systems like banking transactions and order processing', 'Implementing database query optimization techniques', 'Representing file systems and directories']","typedef struct Node { int data; struct Node* next; } Node;
+Node* createNode(int value) {
+Node* newNode = (Node*) malloc(sizeof(Node));
+newNode->data = value;
+newNode->next = NULL;
+return newNode;
+}
+void insertAtHead(Node** head, int value) {
+Node* newNode = createNode(value);
+if (*head == NULL) *head = newNode;
+else {newNode->next = *head; *head = newNode;}}",[]
+Doubly Linked List,"['Two-way Linked List', 'DLL', 'Linked List with two pointers']",Data Structures,"A doubly linked list is a linear collection of data elements, in which navigation is possible in both forward and backward directions. Each element, known as a node, points to the next node (forward) and the previous node (backward).","['Efficient insertion and deletion at any position', 'Frequent access to previous or next element', 'Can be implemented using either static or dynamic memory allocation', 'Memory usage is relatively low compared to other data structures', 'Supports efficient traversal in both forward and backward directions', 'Easy implementation of operations like insert, delete, and search', 'Allows for efficient updating of existing elements', 'Supports efficient insertion of new elements at any position']","['Slow searching due to the need to traverse through the list from the beginning or end', 'Memory usage can increase significantly if not implemented efficiently', 'Insertion and deletion operations can be complex in some cases', 'Requires careful management of node pointers for correct traversal', 'Not suitable for applications requiring random access', 'Can experience cache misses during frequent insertions/deletions', 'May require additional memory for storing predecessor information', 'Traversal can be slower compared to arrays or other data structures']","['Database query results that require efficient scrolling through records', 'Browser history management, where forward and backward navigation is crucial', 'Text editors, where insertion and deletion of characters are frequent', 'File system traversal in operating systems for efficient directory browsing', 'Compilers, where efficient parsing of code segments is essential', 'Graph algorithms, where doubly linked lists can be used to represent edges', 'Network routing protocols, where efficient updating of routing tables is necessary', 'Database indexing mechanisms that require efficient insertion and deletion']","struct Node { int data; struct Node* next; struct Node* prev; }; 
+int main() {
+	struct Node* head = NULL;
+	handle_insert(head, 10);
+	handle_insert(head, 20);
+	handle_delete(head, 10);
+	return 0;
+}
+define handle_insert(Node** head, int data)
+{
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->data = data;
+	newNode->next = NULL;
+
+	if(*head == NULL)
+	{
+		*head = newNode;
+		return;
+	}
+
+	Node* current = *head;
+
+	while(current->next != NULL && current->data < data)
+	{
+		current = current->next;
+	}
+
+	if(current == *head)
+	{
+		newNode->next = (*head)->next;
+		(*head)->next = newNode;
+		newNode->prev = NULL;
+	}
+
+	else
+	{
+		current->prev->next = newNode;
+		newNode->next = current;
+		node->prev = current->prev;
+		node->prev->next = node;
+	}
+	}
+define handle_delete(Node** head, int data)
+{
+	if(*head == NULL)
+	{
+		return;
+	}
+
+	if((*head)->data == data)
+	{
+		*head = (*head)->next;
+		node->prev->next = node->next;
+		node->next->prev = node->prev;
+		free(node);
+		return;
+	}
+
+	Node* current = *head;
+
+	while(current->next != NULL && current->data < data)
+	{
+		current = current->next;
+	}
+
+	if(current == *head)
+	{
+		(*head)->next = (*head)->next->next;
+		(*head)->prev = NULL;
+	}
+
+	else if(current->data == data)
+	{
+		current->prev->next = current->next;
+		node->next->prev = node->prev;
+		free(node);
+	}
+}",[]
+Circular Linked List,"['circularly linked list', 'ring linked list', 'circularly connected list']",Data Structures,"A circular linked list is a type of data structure where the last node points back to the first node, forming a circle. This allows for efficient traversal and manipulation of nodes in both forward and backward directions.","['Efficient memory usage due to sharing of nodes between two lists', 'Faster traversal time due to ability to move in both forward and backward directions', 'Easy insertion and deletion of nodes at any position without affecting adjacent nodes', 'No need for additional pointers or memory allocation for sentinel nodes', 'Supports bidirectional traversal', 'Efficient use of space by reusing existing nodes']","['More complex to implement compared to linear linked lists', 'Additional overhead in managing circular references and node reuse', 'Potential for errors due to incorrect handling of circular references', 'Difficult to find the end of the list if not properly implemented', 'May require more memory allocation and deallocation for each node creation/deletion', 'More challenging to implement in parallel processing environments']","['Implementing circular buffers or queues for efficient data transfer', 'Efficiently traversing and searching large datasets', 'Storing graph or tree structures with cyclic edges or relationships', 'Supporting bidirectional traversal in games, simulations, or scientific computations', 'Implementing memory-efficient caching mechanisms']","struct Node { int data; struct Node* next; }; 
+void createCircularList(struct Node** head) {
+	struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+	temp->data = 10;
+	emp->next = *head;
+	if (*head == NULL)
+		*head = temp;
+	else
+	{
+		struct Node* lastNode = *head;
+		while (lastNode->next != NULL) lastNode = lastNode->next;
+		lastNode->next = temp;
+	}
+	temp->next = *head; // link the new node to the head
+}
+int main() {
+	handle linkedList;
+	createCircularList(&linkedList);
+	// use the circular list as needed
+	return 0;
+}",[]
+Priority Queue,"['Heap data structure', 'Priority queue implementation', 'Min-heap and max-heap']",Data Structures,"A priority queue is a data structure that allows the insertion of elements with associated priorities, where the element with the highest priority is extracted first. It supports operations such as insert, delete-min (or delete-max), and decrease-key.","['Efficient in supporting high-priority elements', 'Supports efficient deletion of minimum or maximum element', 'Can be used to implement scheduling algorithms', 'Allows for efficient retrieval of the highest-priority element', 'Supports efficient insertion of new elements with their associated priorities', 'Can be implemented using an array or a binary heap data structure', 'Has a time complexity of O(log n) for operations such as insert and delete-min']","['Space complexity is O(n), where n is the number of elements in the queue', 'Insertion and deletion can be costly if implemented using an array', 'Can be difficult to maintain heap property during insertion and deletion', 'May require additional memory for storing element priorities']","['Scheduling tasks with varying priority levels', 'Implementing a job queue in operating systems', 'Finding the minimum or maximum value in an array efficiently', ""Dijkstra's algorithm for finding shortest paths in graphs"", ""Prim's algorithm for finding minimum spanning trees in graphs""]","#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 1000
+
+typedef struct { int key, priority; } Element;
+
+typedef struct { Element heap[MAX_SIZE]; int size; } PriorityQueue;
+
+tyne void enqueue(PriorityQueue* pq, int key, int priority) {
+    Element e = (Element){key, priority};
+    if(pq->size < MAX_SIZE)
+        pq->heap[pq->size++] = e;
+}
+
+int dequeue(PriorityQueue* pq) {
+    if(pq->size > 0)
+        return pq->heap[0].key;
+    else
+        return -1;
+}
+
+tyne void decreaseKey(PriorityQueue* pq, int key, int newPriority) {
+    for(int i = 0; i < pq->size; ++i)
+        if(pq->heap[i].key == key)
+            pq->heap[i].priority = newPriority;
+}
+
+int main() {
+    PriorityQueue pq;
+    pq.size = 0;
+
+    enqueue(&pq, 1, 5);
+    enqueue(&pq, 2, 3);
+    enqueue(&pq, 3, 7);
+
+    printf(""Dequeued key: %d\n"", dequeue(&pq));
+
+    decreaseKey(&pq, 2, 10);
+
+    return 0;
+}",[]
+Deque,"['Double-ended queue', 'Head-tail deque', 'Queue with two ends']",Data Structures,"A deque (double-ended queue) is a data structure that allows elements to be added and removed from both the beginning and end. It supports efficient insertion and deletion of elements at either end, with an average time complexity of O(1). A deque can be implemented using arrays or linked lists.","['Efficient insertion and deletion at both ends', 'Average case time complexity of O(1)', 'Supports dynamic resizing', 'Flexible data structure for various applications']","['Space overhead due to extra memory allocation', 'Potential issues with cache performance', 'May require additional implementation effort']","['Implementing undo/redo functionality in text editors', 'Simulating a stack or queue using a deque', 'Efficiently processing data streams from both ends', 'Implementing circular buffers or queues']","char dq[10]; int front = -1, rear = -1; void enqueue_front(char c) { if (front == -1) front = 0; else rear++; dq[rear] = c; } void dequeue_front() { if (front != -1) front++; } void enqueue_rear(char c) { if (front == -1) front = 0, rear = 0; else rear++; dq[rear] = c; } void dequeue_rear() { if (rear > front) rear--; }","['Deques can be implemented as a combination of arrays and linked lists', 'The choice of implementation depends on the specific use case and performance requirements', 'In some cases, using a deque may not provide significant benefits over other data structures']"
+Hash Table,"['Hash Map', 'Dictionary', 'Key-Value Store']",Data Structures,"A hash table is a data structure that stores key-value pairs in an array using a hash function to map keys to indices of the array. The hash function takes the key as input and produces an index into the array where the corresponding value is stored. Hash tables allow for efficient lookup, insertion, and deletion of elements with an average time complexity of O(1).","['Fast lookups: Hash tables allow for fast lookups with an average time complexity of O(1), making them suitable for applications that require frequent searches.', 'Efficient insertions and deletions: Hash tables support efficient insertion and deletion operations with an average time complexity of O(1).', 'Good cache performance: Hash tables can exhibit good cache performance due to the contiguous memory allocation.', 'Supports fast data retrieval: Hash tables allow for fast data retrieval by providing direct access to stored values.', 'Flexible implementation: Hash tables can be implemented using various hash functions and collision resolution techniques.', 'Scalability: Hash tables can handle large amounts of data with minimal performance degradation.', 'Low memory usage: Hash tables typically require less memory compared to other data structures like arrays or linked lists.', 'Easy to implement: Hash tables have a simple implementation, making them suitable for beginners and experienced programmers alike.']","['Sensitivity to hash function quality: A poorly designed hash function can lead to poor performance, collisions, and even crashes.', 'Collision resolution overhead: Collision resolution mechanisms like chaining or open addressing can incur additional overhead.', 'Memory usage can grow: In the worst case, memory usage can increase as the hash table grows due to frequent resizing.', 'Not suitable for ordered access: Hash tables are not designed for ordered access and may not preserve insertion order.', 'Can be sensitive to distribution of keys: If the distribution of keys is skewed or correlated, it can lead to poor performance.', 'May exhibit high variance: Hash table operations can exhibit high variance in their execution time due to hash function quality and collision resolution mechanisms.', 'Not suitable for sequential access: Hash tables are designed for random access and may not support sequential access efficiently.']","['Caching: Hash tables can be used as a cache layer to store frequently accessed data, reducing the need for disk I/O.', 'Database indexing: Hash tables can be used to index large datasets in databases, improving query performance.', 'File systems: Hash tables can be used to manage file metadata and optimize file system performance.', 'Compilers: Hash tables are often used in compilers to store symbol tables and manage memory allocation.', 'Network protocols: Hash tables can be used to implement network protocols like DNS resolution or HTTP caching.', 'Data compression: Hash tables can be used to compress data by storing frequently occurring patterns.', 'Machine learning: Hash tables can be used to store and retrieve large amounts of training data in machine learning models.', 'Recommendation systems: Hash tables can be used to build recommendation systems that suggest items based on user behavior.']","{'hash_table.h': '#ifndef HASH_TABLE_H\n#define HASH_TABLE_H\ntypedef struct HashTable{\n    int size;\n    int capacity;\n    unsigned long* keys;\n    void** values;\n}HashTable;\n#endif', 'hash_table.c': '#include ""hash_table.h""\nvoid hash_table_init(HashTable* table, int capacity){\n    table->size = 0;\n    table->capacity = capacity;\n    table->keys = (unsigned long*)malloc(capacity * sizeof(unsigned long));\n    table->values = (void**)malloc(capacity * sizeof(void*));\n}\nint hash_table_insert(HashTable* table, unsigned long key, void* value){\n    int index = key % table->capacity;\n    if(table->keys[index] == 0 || table->keys[index] == key) {\n        table->values[index] = value;\n        table->keys[index] = key;\n        return 1;\n    }\n    return 0;\n}\nvoid* hash_table_get(HashTable* table, unsigned long key){\n    int index = key % table->capacity;\n    if(table->keys[index] == key) {\n        return table->values[index];\n    }\n    return NULL;\n}', 'main.c': '#include ""hash_table.h""\nint main(){\n    HashTable* table;\n    hash_table_init(table, 10);\n    int result = hash_table_insert(table, 5, (void*)""five"");\n    void* value = hash_table_get(table, 5);\n    printf(""Value at index 5: %s\\n"", (char*)value);\n}'}","['Hash functions can be sensitive to the quality of input data. Poorly designed hash functions can lead to performance issues.', 'Collision resolution mechanisms like chaining or open addressing can incur additional overhead, but are necessary to ensure efficient lookups and insertions.', 'Hash tables require careful implementation to avoid common pitfalls like overflow, underflow, or data corruption.', ""In certain situations, it's essential to use a good hash function that distributes keys evenly across the table to prevent collisions and improve performance."", ""Resizing the hash table can be an expensive operation and may not always result in better performance. It's crucial to monitor usage patterns and adjust the capacity accordingly.""]"
+Hash Map,"['Hash Table', 'Dictionary', 'Associative Array']",Data Structures,"A hash map is a data structure that stores key-value pairs in an array using a hash function to map keys to indices of the array. Each index contains a bucket, which is a linked list of key-value pairs with the same hash value.","['Fast lookups and insertions with an average time complexity of O(1)', 'Good memory usage due to load factor', 'Supports efficient collision resolution using chaining or open addressing']","['Potential for poor performance in case of collisions or hash function weaknesses', 'Memory overhead due to empty buckets and linked lists', 'Sensitivity to hash function quality and choice of initial size']","['Caching: Hash maps are used to implement caches, where keys are the cached items and values are the cached results.', 'Database indexing: Hash tables can be used as index data structures for databases.', 'Set operations: Hash sets can be used to perform set operations such as union, intersection, and difference.', 'String matching: Hash maps can be used to match strings in a given pattern.', 'Cache-friendly data layout', 'Efficient memory allocation']","typedef struct node {int key; char* value; struct node* next;} Node;
+
+typedef struct hash_map {Node** buckets; int size; float load_factor;} HashMap;
+
+void init(HashMap* map, int capacity) {
+    map->buckets = (Node**)malloc(capacity * sizeof(Node*));
+    for (int i = 0; i < capacity; i++) {
+        map->buckets[i] = NULL;
+    }
+    map->size = 0;
+    map->load_factor = 1.0 / capacity;
+}
+
+void insert(HashMap* map, int key, char* value) {
+    unsigned int hash = key % map->size;
+    Node** bucket = &map->buckets[hash];
+    while (*bucket != NULL) {
+        if ((*bucket)->key == key) {
+            (*bucket)->value = strdup(value);
+            return;
+        }
+        bucket = &(*bucket)->next;
+    }
+    *bucket = (Node*)malloc(sizeof(Node));
+    (*bucket)->key = key;
+    (*bucket)->value = strdup(value);
+    map->size++;
+}
+
+void delete(HashMap* map, int key) {
+    unsigned int hash = key % map->size;
+    Node** bucket = &map->buckets[hash];
+    while ((*bucket != NULL) && (*bucket)->key != key) {
+        bucket = &(*bucket)->next;
+    }
+    if (*bucket == NULL) return;
+
+    free((*bucket)->value);
+    Node* next = (*bucket)->next;
+    free(*bucket);
+    *bucket = next;
+}
+
+char* search(HashMap* map, int key) {
+    unsigned int hash = key % map->size;
+    Node** bucket = &map->buckets[hash];
+    while ((*bucket != NULL) && (*bucket)->key != key) {
+        bucket = &(*bucket)->next;
+    }
+    if (*bucket == NULL) return NULL;
+
+    return (*bucket)->value;
+}","['Hash maps can be implemented using separate chaining or open addressing.', 'The choice of hash function and initial size affects the performance of the hash map.', 'Hash maps are sensitive to the quality of the hash function, which should distribute keys uniformly across the array.', 'Empty buckets can be removed from the hash table to improve memory usage.', 'Collision resolution strategies such as linear probing or quadratic probing can be used in open addressing.']"
+Hash Set,"['Set', 'HashSet', 'Unique Elements Container', 'Key-Value Store']",Data Structures,"A hash set is a data structure that stores a collection of unique elements, allowing for efficient insertion, deletion, and membership testing. It uses a hash function to map keys to indices of a backing array, enabling fast lookups and operations.","['Fast lookup, insertion, and deletion with an average time complexity of O(1)', 'Efficient memory usage by storing only unique elements', 'Good for applications requiring frequent additions and removals of elements', 'Can be used to implement sets, bags, and other data structures', 'Supports operations like union, intersection, and difference']","['Sensitive to hash function quality: poor choices can lead to slow performance', 'May suffer from collisions, affecting lookup efficiency', 'Not suitable for applications requiring strict ordering or iteration', 'Can be memory-intensive if not properly resized', 'Maintenance may become complex with large datasets']","['Implementing sets and bags in algorithms', 'Fast membership testing in language interpreters', 'Caching mechanisms to reduce redundant computations', 'Efficient data deduplication and normalization', 'Database query optimization through set operations']","typedef struct hash_set { int* backing_array; size_t capacity; size_t size; } HashSet;
+
+void insert(HashSet* hs, int key) {
+    if (hs->size >= hs->capacity * 0.75) {
+        resize(hs);
+    }
+    hs->backing_array[hs->size] = hash(key); // Assuming a hash function 'hash'
+    hs->size++;
+}
+
+int lookup(HashSet* hs, int key) {
+    return hs->backing_array[hash(key)] == key ? 1 : 0;
+}",[]
+Linear Search,"['Sequential search', 'Unordered search', 'Element location', 'Simple search']",Data Structures,"Linear search is a method of finding an element in a list or array by checking each element individually, one after the other. It starts from the beginning of the list and continues until it finds the target element or reaches the end of the list.","['Simple to implement', 'Fast for small lists or arrays', 'No extra space required']","['Slow for large lists or arrays (O(n) time complexity)', 'Not efficient for ordered data structures', 'Not suitable for searching in sorted data']","[""Searching a list of names to find a specific person's name"", 'Locating a target value in an array of integers', 'Finding a word in a dictionary or thesaurus']","int linearSearch(int arr[], int size, int target) {
+if (size == 0) return -1;
+for (int i = 0; i < size; i++)
+{
+if (arr[i] == target)
+return i;
+}
+return -1;
+}","['Linear search is a basic searching algorithm and has many variations, including', 'Hashing-based linear search for large datasets', 'Using binary search instead of linear search when data is sorted']"
+Binary Search Tree,"['BST', 'Binary Tree Search', 'Ordered Binary Tree']",Data Structures,"A binary search tree is a data structure in which each node has at most two children (i.e., left child and right child) and each node represents a value. The left subtree of a node contains only values less than the node's value, while the right subtree of a node contains only values greater than the node's value.","['Search operations can be performed efficiently with an average time complexity of O(log n), where n is the number of nodes in the tree.', 'Insertion and deletion of nodes can be done efficiently with an average time complexity of O(log n).', 'The tree can be traversed in a sorted order, making it suitable for applications that require sorted data.', 'It supports range queries and nearest neighbor searches.', 'The tree can be balanced to ensure efficient search operations.', 'It is a self-balancing binary search tree, which ensures that the height of the tree remains relatively small even after insertions and deletions.']","['Insertion and deletion operations can cause the tree to become unbalanced, leading to poor performance.', 'The tree requires extra memory to store additional information such as node pointers.', 'Construction of the tree can be time-consuming for large datasets.', 'Balancing the tree can be computationally expensive.', 'The tree may not be suitable for very small datasets due to overhead of extra memory and computation.', 'It is more complex than other data structures like arrays or linked lists.']","['Database indexing', 'File system organization', 'Compilers', 'Text editors', 'Web search engines']","struct Node { int data; struct Node* left, *right; }; void insert(Node** root, int key) { if (*root == NULL) *root = newNode(key); else if (key < (*root)->data) insert(&(*root)->left, key); else if (key > (*root)->data) insert(&(*root)->right, key); }","['A binary search tree can be implemented using various data structures such as arrays or linked lists.', 'There are several types of binary search trees, including AVL trees and Red-Black trees, which ensure efficient search operations by balancing the tree.', 'The height of a binary search tree can vary depending on the order in which nodes are inserted.', 'A balanced binary search tree can be constructed using techniques such as rotations or insertion and deletion operations.']"
+AVL Tree,"['Self-Balancing Binary Search Tree', 'Multiway Search Tree with Balance Property', 'Balanced Binary Search Tree']",Data Structures,"A self-balancing binary search tree data structure, where the difference in height between the left and right subtrees cannot exceed one for any node. It ensures efficient search, insertion, and deletion operations by adjusting its balance factor.","['Efficient search, insertion, and deletion with an average time complexity of O(log n)', 'Guarantees a balanced tree, minimizing the height and maintaining a consistent search time', 'Resilient to data skewness, preventing performance degradation due to uneven node distribution', 'Supports efficient range queries and nearest neighbor searches', 'Easy to implement and maintain, with a straightforward balance factor calculation', 'Flexible in handling varying data insertion rates and deletion patterns', 'Optimized for disk-based storage, reducing page faults and improving overall system performance', 'Supports concurrent access and modification, making it suitable for multi-threaded environments', 'Efficiently handles insertions and deletions by rebalancing the tree in O(log n) time', 'Suitable for implementing B-tree indices and other disk-based data structures']","['Insertion and deletion operations may result in a temporary increase in tree height, leading to increased search times', 'Rebalancing after insertion or deletion can be costly, especially for very large trees', 'May not be suitable for extremely small datasets due to overhead of balance factor calculation', 'Can become unbalanced if insertion/deletion patterns are highly skewed or irregular', 'Inefficient for very small trees (less than 10-15 nodes) due to overhead of balance factor calculation', 'Not self-balancing in the presence of concurrent modifications, requiring manual intervention', 'May require additional memory to store node pointers and balance factors', 'Insertion and deletion can be expensive in terms of time complexity when dealing with highly unbalanced trees', 'Can lead to cache thrashing if not implemented efficiently, resulting in decreased performance']","['Database indexing and querying', 'File system management and organization', 'Cache optimization and data retrieval', 'Web search engine ranking and indexing', 'Machine learning model optimization and prediction', 'Scientific computing and data analysis', 'Real-time systems and embedded systems development', 'Big data processing and storage systems', 'High-performance computing (HPC) applications', 'Predictive modeling and simulation']","int insertNode(int key, Node* root){
+if(root == NULL) {
+root = newNode(key);
+count++;
+return root;
+}
+if(key < root->key)
+root->left = insertNode(key, root->left);
+else if (key > root->key)
+root->right = insertNode(key, root->right);
+else return root; // duplicate key
+int balanceFactor = getBalance(root);
+if(balanceFactor > 1 && key < root->left->key) {
+return rightRotate(root);
+} else if (balanceFactor > 1 && key > root->left->key) {
+root->left = leftRotate(root->left);
+root = rightRotate(root);
+}
+else if (balanceFactor < -1 && key > root->right->key) {
+return leftRotate(root);
+} else if (balanceFactor < -1 && key < root->right->key) {
+root->right = rightRotate(root->right);
+root = leftRotate(root);
+}
+count++;
+return root;
+}",[]
+Red Black Tree,"['B-Tree', '2-3 Tree', 'Balanced Binary Search Tree']",Data Structures,"A Red Black Tree is a self-balancing binary search tree data structure with a guarantee of O(log n) time for search, insert, and delete operations. Each node in the tree has a color (red or black), and the tree maintains the following properties: each leaf node is black, all red nodes must have two black children, and for any node, all paths from the root to its descendant leaves contain the same number of black nodes.","['O(log n) time complexity for search, insert, and delete operations', 'Self-balancing property ensures efficient data retrieval', 'Supports fast search, insertion, and deletion of elements', 'Maintains a consistent height throughout the tree', 'Efficient use of memory']","['Insertion and deletion operations can be complex to implement', 'Requires careful maintenance of balance factor during rotations', 'Tree rebalancing can lead to increased overhead', 'May not perform well with skewed data distributions', 'Insertion and deletion can cause temporary imbalance']","['Database indexing and query optimization', 'File system organization and access', ""Compilers' symbol tables and parse trees"", 'Data compression algorithms and Huffman coding', 'Scientific computing and numerical analysis']","typedef struct node { int key; char color; struct node* left, *right, *parent; } Node;
+Node* root = NULL;
+typedef enum { RED, BLACK } Color;
+void insert(int key) {
+	Node* newNode = (Node*) malloc(sizeof(Node));
+	newNode->key = key;
+	newNode->color = RED;
+	newNode->left = newNode->right = newNode->parent = NULL;
+	insert_node(&root, newNode);
+}
+void insert_node(Node** node, Node* newNode) {
+	if (*node == NULL) {
+		*node = newNode;
+	} else if (newNode->key < (*node)->key) {
+		insert_node(&((*node)->left), newNode);
+	} else {
+		insert_node(&((*node)->right), newNode);
+	}
+}",[]
+Splay Tree,"['self-adjusting binary search tree', 'splaying binary search tree', 'splay binary tree']",Data Structures,"A self-balancing binary search tree that rotates nodes to the root based on access patterns, maintaining a balanced structure.","['Self-balances after each operation, ensuring efficient search, insertion, and deletion in O(log n) time.', 'Adapts to changing access patterns, minimizing page faults and improving performance.', 'Can be used as a cache for frequently accessed elements.', 'Supports both binary search tree operations (search, insert, delete) and splaying.', 'Maintains a balanced structure even after repeated accesses to the same node.', 'Efficient in managing large datasets with skewed access patterns.']","['Requires more complex code compared to traditional binary search trees.', 'Can suffer from cache thrashing if not properly implemented.', 'May incur additional overhead for splay operations, especially for small trees.', 'Not suitable for applications requiring strict ordering of elements.', 'Can lead to uneven node distribution if access patterns are highly irregular.']","['Database indexing and caching', 'File system management (e.g., directory traversal)', ""Compilers' symbol tables"", 'XML document parsing', 'Managing large datasets in scientific simulations', 'Self-adjusting data structures for web search engines']","typedef struct Node {
+	int key;
+	struct Node* left, *right;
+} Node;
+
+void splay(Node** root, int key) {
+	Node* temp = NULL;
+	pushdown(root, &temp, key);
+}
+
+void pushdown(Node** root, Node** temp, int key) {
+	if (*root == NULL || (*root)->key == key)
+		return;
+
+	int cmp = key - (*root)->key;
+	if (cmp < 0)
+		(*root)->left = splay(&(*root)->left, key);
+	else if (cmp > 0)
+		(*root)->right = splay(&(*root)->right, key);
+
+	temp = (*root);
+	*root = NULL;
+}
+
+int main() {
+	Node* root = malloc(sizeof(Node));
+	root->key = 5;
+	root->left = root->right = NULL;
+
+	printf(""Pre-splay tree: %d\n"", root->key);
+
+	splay(&root, 3);
+	printf(""Post-splay tree: %d\n"", root->key);
+
+	return 0;
+}",[]
+B-Tree,"['Multiway Search Tree', 'Balanced Multikey Search Tree', 'Variable-Length Search Tree']",Data Structures,"{'concept': 'A self-balancing search tree data structure that keeps data sorted and allows for efficient insertion, deletion, and searching with an average time complexity of O(log n). It is a multi-level index where each node has a fixed number of child nodes, and the height of the tree is kept relatively constant by rotating nodes during insertions and deletions.', 'properties': ['Each internal node represents a search key,', 'All keys in the left child node are less than the search key in its parent node,'], 'examples': ['Database indexing', 'File systems']}","['Efficient insertion and deletion with O(log n) time complexity', 'Supports range queries and prefix matching', 'Balanced tree structure reduces page traversals', 'Good for large datasets with frequent updates', 'Robust against node failures in distributed systems']","['Insertion and deletion can be slow due to rotations', 'Space usage is high due to multiple pointers per node', 'Height of the tree depends on the balance factor', 'Implementation complexity increases with higher order B-trees', 'Not suitable for small datasets or static data']","['Database indexing and querying', 'File system organization and retrieval', 'Text searching and ranking algorithms', 'Caching mechanisms in web servers', 'Query optimization in relational databases']","typedef struct node {
+struct node* child[26];
+int key;
+} *BTree;
+void insert(BTree root, int key) {
+BTree new_node = malloc(sizeof(struct node));
+new_node->key = key;
+// Insertion logic...
+}
+void inorderTraversal(BTree root) {
+if (root == NULL)
+return;
+// Print the current node's key...
+inorderTraversal(root->child[0]);
+inorderTraversal(root->child[1]);
+inorderTraversal(root->child[2]);
+}",[]
+B+ Tree,"['Balanced B-Tree', 'B+ File Organization', 'Multi-Level Indexing']",Data Structures,"A self-balancing search tree data structure that keeps data sorted and allows search, insert, and delete operations in logarithmic time. It is a multi-level indexing technique used to organize large amounts of data on secondary storage devices.","['Supports range queries efficiently', 'Maintains data balance across nodes', 'Optimizes disk I/O by minimizing the number of block accesses', 'Suitable for large datasets and real-time systems', 'Improves query performance by reducing tree height', 'Enhances storage efficiency through node merging']","['Insertion and deletion operations can be complex', 'Tree rebalancing may lead to temporary performance degradation', 'Requires careful tuning of parameters such as order and fanout', 'May not perform well with highly skewed data distributions', 'Can suffer from cascading failures during high insertion rates', 'Higher memory usage due to node caching']","['Database indexing and querying', 'File systems organization and retrieval', 'Big data processing and analytics', 'Real-time data processing and stream processing', 'Scientific simulation and modeling', 'Gaming industry for game state management', 'Cloud storage systems for data retrieval and caching']","#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a node in the B+ tree
+struct Node {
+    int order;
+    int keys[100];
+    int children[100];
+    int leaf;
+};
+
+// Function to create a new node
+Node* newNode(int order) {
+    Node* temp = (Node*) malloc(sizeof(Node));
+    temp->order = order;
+    for (int i = 0; i < 2 * order - 1; i++) {
+        temp->keys[i] = INT_MIN;
+        temp->children[i] = NULL;
+    }
+    temp->leaf = 1;
+    return temp;
+}
+
+// Function to insert a key into the B+ tree
+void insertKey(Node** root, int* order, int* keys, int child, int key) {
+    // ... (insertion logic omitted for brevity)
+}
+
+int main() {
+    Node* root = newNode(3);
+    int keys[] = {5, 2, 8, 3};
+    insertKey(&root, &keys[0], keys, 1, 9);
+    // ... (traversal and search logic omitted for brevity)
+}",[]
+Segment Tree,"['Balanced Search Trees', 'Segmented Trees', 'Interval Trees']",Data Structures,"A Segment Tree is a binary tree data structure used for storing information about intervals, or segments. It is particularly useful in applications where range queries are frequently performed. The tree is constructed by dividing the interval into two equal parts at each node, allowing for efficient searching and updating of intervals.","['Efficient range queries with O(log n) time complexity', 'Supports insertions and deletions of intervals in O(log n) time', 'Space-efficient storage of interval data', 'Flexible and scalable structure for large datasets', 'Allows for overlapping intervals to be stored efficiently', 'Can be used for a variety of range-based queries, such as sum, min, max, etc.', 'Segment Trees can handle multiple queries on the same interval', 'Supports dynamic updates to the tree structure']","['Requires additional memory storage for tree nodes', 'Insertion and deletion operations may be complex to implement', 'May not be suitable for very small datasets due to overhead of tree construction', 'Can become inefficient if intervals are highly unbalanced or irregular', 'Requires careful balancing to ensure efficient query performance']","['Range-based queries in databases and data warehouses', 'Efficient storage and querying of interval-based data in scientific simulations', 'Time-series data analysis and prediction models', 'Geographic information systems (GIS) for spatial range queries', 'Network traffic monitoring and analysis', 'Financial modeling and forecasting with time-dependent variables']","struct node{int start,end;node* left,right;};
+void buildTree(node** root,int l,int r){if(l==r){*root=(node*)malloc(sizeof(node));(*root)->start=l;(*root)->end=r;return;}int m=(l+r)/2;if((*root)=(node*)malloc(sizeof(node)))(*root)->start=l;(*root)->end=m;buildTree(&((*root)->left),l,m);buildTree(&((*root)->right),m+1,r);}void update(node* root,int i,int value){if(root->start==root->end){root->value+=value;return;}int m=(root->start+root->end)/2;if(i<=m)update(root->left,i,value);elseupdate(root->right,i,value);
+int query(node* root,int l,int r){if(l>root->end||r<root->start)return 0;if(l<=root->start&&r>=root->end)return root->value;int m=(root->start+root->end)/2;if(m>=l)res+=query(root->left,l,r);
+if(m<r)res+=query(root->right,l,r);return res;}",[]
+Fenwick Tree,"['Binary Indexed Tree', 'Compressed Binary Indexed Tree', 'Cartesian Tree']",Data Structures,"A Fenwick tree is a data structure that stores a sequence of numbers in an array, allowing for efficient range sum queries and point updates.","['Supports range sum queries with O(log n) time complexity', 'Allows point updates with O(log n) time complexity', 'Memory usage is relatively low compared to other data structures', 'Efficient for sparse arrays or matrices', 'Can be used for offline range sum queries and updates', 'Can handle large datasets efficiently', 'Supports prefix sums and cumulative sums', 'Can be implemented with a binary array']","['Not suitable for online range sum queries and updates due to cache efficiency', 'Slow for dense arrays or matrices', 'Cache locality can be an issue if not properly optimized', 'Not designed for insertion, deletion, or other operations on the underlying array', 'Requires additional memory for indexing and bit manipulation', 'Can be complex to implement and debug', 'Does not support random access queries', 'May require multiple iterations for certain range sum queries']","['Efficient range sum queries in sparse matrices or arrays', 'Compressed binary indexed tree for fast prefix sums', 'Cartesian trees for storing and querying complex data structures', 'Fenwick tree-based approach to finding the largest subset of a set with a given property', 'Optimized algorithm for calculating cumulative sums over large datasets']","int* fenwickTreeInit(int n) {
+	int* ft = (int*)malloc((n + 1)*sizeof(int));
+	for (int i = 0; i <= n; i++) ft[i] = 0;
+	return ft;
+}
+
+void updateFenwickTree(int* ft, int k, int value) {
+	while (k < ftSize(ft)) {
+		ft[k] += value;
+		k |= k + 1;
+	}
+}
+
+int queryFenwickTree(int* ft, int i) {
+	int sum = 0;
+	while (i > 0) {
+		sum += ft[i];
+	　i -= i & -i;
+	}
+	return sum;
+}",[]
+Trie,"['prefix tree', 'digital tree', 'finite automaton']",Data Structures,"A Trie is a data structure composed of a set of nodes, where each node represents a string. It is often used for storing and retrieving large amounts of string data efficiently.","['Supports fast lookup, insertion, and deletion operations with an average time complexity of O(m), where m is the length of the input string', 'Can store multiple strings with the same prefix efficiently', 'Suitable for implementing autocompletion and prefix matching algorithms', 'Compact storage requirements due to sharing common prefixes between nodes', 'Efficient use of memory, especially when dealing with a large number of unique strings']","['Insertion and deletion operations can be slow if the Trie is unbalanced', 'Not suitable for storing non-string data or complex data structures', 'Can become inefficient in terms of space usage if not properly optimized', 'Limited support for multi-key queries compared to other data structures', 'Can suffer from memory fragmentation issues if used incorrectly']","['Autocomplete feature implementation for search bars and input fields', 'IP routing and packet forwarding in computer networks', 'File system storage and retrieval of file names and directories', 'Spell checking and dictionary lookups in natural language processing tasks', 'Text classification and categorization in information retrieval systems']","struct node { char data; struct node* children[26]; bool is_end_of_word; }; int main() { // Initialize root node node* root = (node*)malloc(sizeof(node)); root->data = '
+'; for (int i = 0; i < 26; i++) root->children[i] = NULL; return 0; }",[]
+Suffix Tree,"['suffix trie', 'longest proper prefix which is also a suffix tree', 'LPPS tree']",Data Structures,"A suffix tree is a compact, space-efficient data structure that stores all the suffixes of a given string. It is a tree-like data structure where each node represents a substring and its children represent overlapping substrings.","[""Sparse representation of a string's suffixes"", 'Efficient support for suffix queries', 'Facilitates pattern matching and search operations', 'Faster searching and retrieval of information', 'Memory-efficient, especially for large strings', 'Supports substring matching and counting', 'Enables efficient computation of longest common prefixes', 'Optimized for prefix matching and substring querying']","['Difficult to construct from scratch', 'Memory usage can be high for very long strings', 'Not well-suited for frequent insertions or deletions', 'Maintenance may require significant computational overhead', 'Frequently accessed nodes can lead to performance bottlenecks', 'Construction time is often longer than other data structures', 'Sparse node distribution can result in less efficient queries']","['Text searching and indexing algorithms', 'Pattern matching and regular expressions', 'Data compression and encoding schemes', 'Cryptographic hash functions and digital signatures', 'Machine learning and natural language processing', 'Genomic sequence analysis and biological databases', 'Automated testing and debugging tools', 'Regular expression parsing and optimization']","char string[] = ""hello world"";
+int length = strlen(string);
+suffix_tree tree;
+tree.build(string, length);
+code node = tree.search(""world"");
+instruction instruction;
+instruction.query(node);",[]
+Suffix Array,"['suffix tree array', 'prefix sum array', 'suffix index']",Data Structures,A suffix array is a data structure that stores the starting positions of all suffixes of a given string in sorted order. It is an array where each element represents the starting position of a unique suffix of the input string.,"['Supports fast range minimum query (RMQ) operations with O(1) time complexity', 'Enables efficient substring matching and searching', 'Can be used to build suffix trees and laddered suffix trees', 'Efficient for data compression and indexing', 'Supports string manipulation and pattern matching']","['Requires significant memory space to store the array', 'Construction of the suffix array can be computationally expensive', 'May not be suitable for very large strings due to memory constraints', 'Requires additional data structures for efficient query operations', 'Can be affected by issues related to string length and character distribution']","['String searching and matching in natural language processing', 'Efficient substring matching in bioinformatics and text mining', 'Data compression and indexing in databases and file systems', 'Pattern recognition and classification in machine learning', 'String manipulation and querying in text editors and IDEs']","typedef struct suffix_array {
+int* start_positions;
+int string_length;
+} suffix_array_t;
+
+void construct_suffix_array(char* input_string, int* start_positions) {
+int i;
+for (i = 0; i < strlen(input_string); i++) {
+start_positions[i] = i;
+}
+sort(start_positions, strlen(input_string));
+}
+
+int query_suffix_array(suffix_array_t* suffix_array, int query_index) {
+return suffix_array->start_positions[query_index];
+}",[]
+Min Heap,"['Minimum Heap', 'Priority Queue', 'Smallest Element First']",Data Structures,"A min heap is a complete binary tree where each parent node is less than or equal to its child nodes. It maintains the property that the smallest element is always at the root, and the heap ordering is typically done using a comparison function.","['Minimizes the number of comparisons required to find the smallest element', 'Supports efficient insertion and deletion operations with logarithmic time complexity', 'Maintains the heap property with each operation, ensuring the smallest element remains at the root', 'Can be used for sorting and priority queuing applications', 'Has a compact storage representation compared to other data structures like arrays or linked lists', 'Supports efficient merging of multiple min heaps into a single heap']","['May require additional memory for storing the tree structure', 'Insertion and deletion operations can be slow due to shifting nodes in the tree', 'Requires more complex implementation compared to other data structures like arrays or linked lists', 'Can become unbalanced if elements are inserted or deleted frequently at one end of the heap', 'Does not support fast search, insertion, or deletion operations for arbitrary positions in the heap']","['Sorting algorithms, such as Heapsort and Priority Queue sort', 'Priority queuing systems where tasks need to be executed based on their priority level', 'Memory management, like heap allocation and deallocation in operating systems', ""Dijkstra's algorithm for finding the shortest path in a graph"", 'Bellman-Ford algorithm for finding the minimum distance from the source node to all other nodes in a weighted graph']","#include <stdio.h>
+#include <stdlib.h>
+
+// Define the Min Heap structure with array and size fields
+typedef struct {
+    int* arr;
+    int size;
+} MinHeap;
+
+// Function to create a new min heap with initial capacity
+MinHeap* createMinHeap(int initialCapacity) {
+    MinHeap* minHeap = (MinHeap*) malloc(sizeof(MinHeap));
+    minHeap->arr = (int*) malloc(initialCapacity * sizeof(int));
+    minHeap->size = 0;
+    return minHeap;
+}
+
+// Function to insert a new element into the min heap
+void insertElement(MinHeap* minHeap, int element) {
+    if (minHeap->size == minHeap->arr[0]) {
+        // If array is full, double its capacity and re-heapify
+        int* tempArr = (int*) malloc(2 * minHeap->arr[0] * sizeof(int));
+        for (int i = 0; i < minHeap->size; i++) {
+            tempArr[i] = minHeap->arr[i];
+        }
+        free(minHeap->arr);
+        minHeap->arr = tempArr;
+    }
+    minHeap->arr[minHeap->size] = element;
+    int index = minHeap->size++;
+    while (index != 0) {
+        // Heapify the array to maintain heap property
+        if (minHeap->arr[parent(index)] > minHeap->arr[index]) {
+            // Swap elements and move up the tree
+            int temp = minHeap->arr[parent(index)];
+            minHeap->arr[parent(index)] = minHeap->arr[index];
+            minHeap->arr[index] = temp;
+            index = parent(index);
+        } else {
+            break;
+        }
+    }
+}
+
+// Function to print the min heap elements in sorted order
+void printMinHeap(MinHeap* minHeap) {
+    for (int i = 0; i < minHeap->size; i++) {
+        printf(""%d\n"", minHeap->arr[i]);
+    }
+}
+
+// Example usage of the Min Heap data structure
+int main() {
+    // Create a new min heap with initial capacity 10
+    MinHeap* minHeap = createMinHeap(10);
+
+    // Insert elements into the min heap in ascending order
+    insertElement(minHeap, 15);
+    insertElement(minHeap, 5);
+    insertElement(minHeap, 3);
+    insertElement(minHeap, 18);
+    insertElement(minHeap, 2);
+    insertElement(minHeap, 9);
+
+    // Print the sorted elements in the min heap
+    printMinHeap(minHeap);
+
+    return 0;
+}",[]
+Max Heap,"['Max Binary Heap', 'Max Heap Data Structure', 'Maximum Heap']",Data Structures,"A max heap is a complete binary tree where each parent node is greater than or equal to its child nodes. It satisfies the heap property, which states that for any given node I, the value of I is either greater than or equal to the values of its children.","['Efficient insertion and deletion operations', 'Satisfies the heap property, making it suitable for priority queues and sorting algorithms', 'Supports efficient merge and extract-max operations', ""Can be used as a data structure in graph algorithms such as Dijkstra's algorithm"", 'Has a time complexity of O(log n) for insertion and deletion operations']","['Does not support efficient search or retrieval operations', 'Requires extra memory to store the heap property', 'Insertion and deletion operations can be complex if not implemented correctly', 'Not suitable for applications where data is frequently updated', 'Can be slow for large datasets due to the need to maintain the heap property']","['Priority queues in operating systems', 'Sorting algorithms such as heapsort', ""Graph algorithms like Dijkstra's algorithm and Prim's algorithm"", 'Memory management in computer systems', 'Database query optimization']","typedef struct node { int key; struct node *left, *right; } node_t;
+
+void insert_max_heap(node_t **root, int key) {
+    if (!(*root)) {
+        (*root) = (node_t *)malloc(sizeof(node_t));
+        (*root)->key = key;
+        return;
+    }
+    if (key > (*root)->key) {
+        insert_max_heap(&((*root)->right), key);
+    } else {
+        insert_max_heap(&((*root)->left), key);
+    }
+}
+
+int extract_max(node_t *root) {
+    int max_key = root->key;
+    node_t *temp = root;
+    if (root->left == NULL) {
+        *root = root->right;
+    } else if (root->right == NULL) {
+        *root = root->left;
+    } else {
+        temp = root->left;
+        while (temp->right != NULL) {
+            temp = temp->right;
+        }
+        root->key = temp->key;
+        node_t *tmp = temp;
+        temp = root->right;
+        root->right = tmp->left;
+        free(tmp);
+    }
+    free(temp);
+    return max_key;
+}",[]
+Heap Sort,"['Heap Sort Algorithm', 'Heapify and Extract Min', 'Binary Heap Sorting']",Algorithms,"Heap sort is a comparison-based sorting algorithm that uses a binary heap data structure. It first builds a max heap, then repeatedly removes the maximum element from the heap and places it at the end of the sorted array, reducing the size of the heap by one in each step.","['Time complexity: O(n log n) on average, making it efficient for large datasets.', 'In-place sorting, meaning it does not require any additional storage space beyond the input array.', 'Stable algorithm, maintaining the relative order of equal elements.', 'Simple to implement and understand, with a clear and concise code structure.', 'Works well on both small and large datasets, making it suitable for various applications.']","['Requires extra memory for the heap data structure, although in-place variants exist.', ""Not a stable sorting algorithm when considering equal elements' order."", 'Has a high time complexity compared to other algorithms like insertion sort or counting sort.', 'May not be as efficient on already-sorted or nearly sorted inputs.', 'Can be less cache-friendly due to the heap operations.']","['General-purpose sorting, particularly useful when input size is large or data is dynamic.', 'Priority queue implementation using a binary heap structure.', 'Efficient sorting of arrays with distinct elements, especially in embedded systems.', 'Stable sorting requirements are met in applications like data compression and cryptography.', 'Used in database query optimization for efficient sorting of query results.']","#include <stdio.h>
+#include <stdlib.h>
+
+void heapify(int arr[], int n, int i) {
+	int largest = i;
+	int left = 2 * i + 1;
+	int right = 2 * i + 2;
+
+	if (left < n && arr[left] > arr[largest])
+		largest = left;
+
+	if (right < n && arr[right] > arr[largest])
+		largest = right;
+
+	if (largest != i)
+	{
+		int temp = arr[i];
+		arr[i] = arr[largest];
+		arr[largest] = temp;
+		heapify(arr, n, largest);
+	}
+}
+
+void heap_sort(int arr[], int n) {
+	for (int i = n / 2 - 1; i >= 0; i--) {
+		heapify(arr, n, i);
+	}
+
+time_t start, end;
+start = time(NULL);
+
+	for (int i = n - 1; i > 0; i--) {
+		heapify(arr, i + 1, 0);
+		int temp = arr[0];
+		arr[0] = arr[i];
+		arr[i] = temp;
+		heapify(arr, i, 0);
+	}
+end = time(NULL);
+printf(""Time taken: %f seconds\n"", difftime(end, start));
+}
+
+int main() {
+	int n;
+	printf(""Enter the number of elements:\n"");
+scanf(""%d"", &n);
+
+	int* arr = (int*)malloc(n * sizeof(int));
+	for (int i = 0; i < n; i++)
+	{
+		printf(""Enter element %d:\n"", i + 1);
+		scanf(""%d"", &arr[i]);
+	}
+
+	heap_sort(arr, n);
+
+	printf(""Sorted array:\n"");
+	for (int i = 0; i < n; i++)
+	{
+		printf(""%d\t"", arr[i]);
+	}
+free(arr);
+return 0;
+}","['Heap sort is a stable sorting algorithm, but it can be unstable when considering the order of equal elements.', 'The choice between heap sort and other algorithms like quicksort or mergesort depends on factors such as input size, data distribution, and implementation requirements.', 'To improve the performance of heap sort on already-sorted or nearly sorted inputs, consider using a variant that takes advantage of this property.', 'Heap sort is not suitable for sorting arrays with very small sizes (e.g., less than 10 elements), due to its high overhead in terms of function calls and memory allocation.']"
+Insertion Sort,"['Ascending Order Sort', 'Sequential Insertion', 'In-Place Sorting']",Data Structures,"A sorting algorithm that works by dividing the input into a sorted and an unsorted region, iterating through the unsorted region, and inserting each element into its correct position in the sorted region.","['Efficient for small arrays or nearly sorted lists', 'In-place sorting, requiring minimal additional memory', 'Simple implementation, making it easy to understand and maintain']","['Time complexity is O(n^2) in the worst case', 'Not suitable for large datasets due to high time complexity', 'May require multiple passes through the data if the list is nearly sorted']","['Sorting small lists or arrays of integers, characters, or other comparable elements', 'Maintaining a partially ordered dataset, such as a binary search tree', 'Implementing a priority queue or heap data structure']","int insertionSort(int arr[], int n)
+{
+	for (int i = 1; i < n; i++)
+	{
+		int key = arr[i];
+		int j = i - 1;
+		while (j >= 0 && arr[j] > key)
+		{
+			arr[j + 1] = arr[j];
+		　j--;
+		}
+		arr[j + 1] = key;
+	}
+	return 0;
+}","['Insertion sort can be implemented with a variety of initialization methods, such as using a random permutation or a nearly sorted list', 'The algorithm has been adapted for use in external sorting algorithms, where the data is too large to fit in memory']"
+Selection Sort,"['Exchange Sort', 'Straight Selection Sort', 'Select Sort']",Data Structures,"Selection sort is a simple sorting algorithm that works by repeatedly finding the minimum element from unsorted part and putting it at the beginning. The algorithm maintains two subarrays in a given array: the subarray which is already sorted, and the remaining subarray which is unsorted. In every iteration of selection sort, the minimum element from the unsorted subarray is picked and moved to the sorted subarray.","['Simple to implement', 'Efficient for small datasets', 'In-place sorting (does not require additional storage)', 'Stable sorting algorithm', 'Adaptable to different data types']","['Not suitable for large datasets due to high time complexity', 'Time complexity of O(n^2) makes it inefficient for large datasets', 'Not adaptive to input size', 'Inefficient in practice compared to other sorting algorithms like quicksort or mergesort']","['Used as a simple example to illustrate the concept of sorting algorithms in introductory programming courses', 'Can be used as a base for more complex sorting algorithms, such as modified selection sort', 'Has applications in certain real-world scenarios where simplicity is prioritized over efficiency, such as in embedded systems or resource-constrained devices']","void selectionSort(int arr[], int n) {
+int i, j, minIdx;
+for (i = 0; i < n-1; i++) {
+minIdx = i;
+for (j = i+1; j < n; j++)
+if (arr[j] < arr[minIdx])
+minIdx = j;
+swap(arr[i], arr[minIdx]);
+}
+}",[]
+Bubble Sort,"['Bubble Sort Algorithm', 'Bubblesort', 'Comparison-Based Sorting']",Data Structures,"Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.","['Simple to implement', 'Efficient for small data sets', 'In-place sorting', 'Stable sorting algorithm', 'Does not require additional memory', 'Can be easily parallelized']","['Not efficient for large data sets (O(n^2) time complexity)', 'Not suitable for real-time systems due to its sequential nature', 'Sensitive to input order and initial arrangement of elements']","['Educational purposes: easy to understand and implement', 'Small data sets or embedded systems where memory is limited', 'Stability is a requirement (e.g., sorting linked lists)', 'Real-time systems with small, predictable data sets']","int bubbleSort(int arr[], int n){
+for (int i = 0; i < n-1; i++){
+ for (int j = 0; j < n-i-1; j++) {
+ if (arr[j] > arr[j+1]) {
+ // Swap arr[j] and arr[j+1]
+ int temp = arr[j];
+ arr[j] = arr[j+1];
+ arr[j+1] = temp;
+ }
+ }
+ }
+ return 0;}",[]
+Counting Sort,"['Radix sort', 'Bucket sort', 'Counting algorithm']",Data Structures,Counting sort is a sorting algorithm that works by counting the number of objects having distinct key values. It is an integer sorting algorithm which sorts in O(n + k) time.,"['Efficient for large datasets with a small range of input numbers', 'Simple to implement', ""In-place sorting, i.e., it doesn't require any extra space"", 'Stable sort', 'Works well for sparse data']","['Requires extra memory proportional to the range of input values', 'Not suitable for large datasets with a large range of input numbers', 'Not a comparison-based sorting algorithm, hence not stable when compared with other sorting algorithms like merge sort and quick sort', 'Limited applicability due to the assumption that all inputs are integers in a given range']","['Sorting integers within a specific range, such as employee IDs or scores', 'Counting the frequency of each element in an array', 'Efficient sorting for sparse data where most elements fall into a small range', 'Radix sort variant: counting sort can be used to count the occurrences of each digit in a given radix sort']","int main() {
+ int arr[] = {4, 2, 2, 8, 3, 3, 1};
+ int max = *max_element(arr, arr + 6) + 1;
+ int *freq = new int[max];
+ for (int i = 0; i < max; ++i)
+ freq[i] = 0;
+ for (int i : arr)
+ ++freq[i];
+ for (int i = 1; i < max; ++i)
+ freq[i] += freq[i - 1];
+ int *output = new int[6];
+ for (int i : arr) output[--freq[i]] = i;
+ for (int i = 0; i < 6; ++i) printf(""%d "", output[i]);
+ delete[] freq; delete[] output;
+ return 0;
+}",[]
+Radix Sort,"['Radix Sort Algorithm', 'Digit-by-Digit Sorting', 'Base- Radix Sorting']",Algorithms,A non-comparative integer sorting algorithm that sorts numbers digit by digit from least significant digit to most. It's based on counting the occurrences of each digit value in a given array.,"['Radix sort has a time complexity of O(nk), where n is the number of elements and k is the number of digits in the maximum element, making it efficient for large datasets with small to moderate numbers of digits.', ""It's not affected by the order of input, so it can handle any type of data."", 'Radix sort has a space complexity of O(n + k) due to the counting arrays used.', 'This algorithm is stable and non-destructive, preserving the relative order of equal elements.', 'Radix sort can be parallelized for further efficiency in multi-core processors.', 'The process only requires one pass through the data.', ""It's a divide-and-conquer approach that makes it easy to implement.""]","['This algorithm is not suitable for sorting large numbers or numbers with a high number of digits due to its exponential time complexity.', 'Radix sort may be slower than other algorithms like quicksort or mergesort for smaller inputs.', 'It requires a significant amount of extra memory to store the counting arrays.', 'Radix sort assumes that each element is an integer, which can limit its applicability in certain scenarios.']","['Sorting large datasets of integers with small to moderate numbers of digits', 'Stable sorting required for preserving order of equal elements', 'Real-time data processing where speed and stability are crucial']","char array[100];
+int i, j;
+freq[10] = {0};
+
+for(i=0; i<100; i++) {
+if (array[i] >= '0' && array[i] <= '9')
+{
+int digit = array[i] - '0';
+++freq[digit];
+}}
+freq[10] = 0;
+
+for(i=1; i<10; i++) {
+if (freq[i] != 0)
+{
+for(j=0; j<100; j++)
+if (array[j] >= '0' && array[j] <= '9')
+{
+digit = array[j] - '0';
+if (digit == i) {
+printf(""%d\n"", j);
+freq[10]++; // increment count
+}
+}}}
+freq[10]--;",[]
+Bucket Sort,"['Bucketing Algorithm', 'Non-Comparison Sorting Algorithm', 'Distributed Sort']",Data Structures,A sorting algorithm that works by dividing the input list into buckets and then sorting these buckets individually. Each bucket is a container that holds elements with values within a specific range.,"['Has an average-case time complexity of O(n + k), where n is the number of elements and k is the number of buckets', 'Is efficient for large datasets and can be parallelized to improve performance', 'Does not require comparison operations, making it suitable for sorting complex data types', 'Can handle duplicate values by using multiple buckets or other techniques', 'Has a low space complexity, as only an additional array is required for the buckets']","['Requires prior knowledge of the input data distribution to optimize bucket size and placement', 'May not perform well on datasets with skewed distributions or outliers', 'Can be slow in practice due to overhead from memory allocation and bucket management', 'Does not provide stability, which can lead to issues when sorting by multiple keys', 'May require additional processing steps for partial sorting or in-place sorting']","['Sorting large datasets on distributed systems, such as clusters or cloud infrastructure', 'Efficiently sorting data with complex keys or values', 'Real-time data processing and streaming applications', 'Handling duplicate values or near-duplicate data sets', 'Scientific computing and big data analytics']","int main() {
+	const int numElements = 10;
+	const int numBuckets = 5;
+	elementType arr[numElements];
+	bucket b[numBuckets];
+
+	// Initialize buckets with default values
+	for (int i = 0; i < numBuckets; ++i) {
+		b[i].minValue = INT_MAX;
+	}
+
+	// Insert elements into the appropriate bucket
+	for (int i = 0; i < numElements; ++i) {
+		elementType val = arr[i];
+		int bucketIndex = determineBucket(val, numBuckets);
+		b[bucketIndex].insert(val);
+	}
+
+	// Sort the buckets individually
+	for (int i = 0; i < numBuckets; ++i) {
+	tb[i].sort();
+	}
+
+	// Collect and return the sorted elements
+	elementType sortedArr[numElements];
+	int j = 0;
+	for (int i = 0; i < numBuckets; ++i) {
+		sortedArr[j++] = b[i].getMinValue();
+	}
+
+	return 0;
+}",[]
+Shell Sort,"['Shellsort', 'Comparison-based sort', 'Incremental sort']",Data Structures,Shell sort is a comparison-based sorting algorithm that generalizes the insertion sort by allowing the comparison and exchange of far-apart elements. It was developed by Donald L. Shell in 1959.,"['Efficient for partially sorted lists, having an average time complexity of O(n log n)', 'Simple to implement', 'In-place sorting, requiring minimal extra memory', 'Stable sorting algorithm, preserving the order of equal elements', 'Works well for small datasets', 'Can be used as a drop-in replacement for other sorting algorithms in some cases']","['Worst-case time complexity of O(n^2)', 'Not suitable for large datasets or nearly sorted lists', 'May not perform well on data with many duplicates', 'Implementation-dependent, with various shell sequences possible', 'Requires extra memory to store the temporary array during sorting']","['Sorting partially ordered lists, such as those resulting from prior sorting operations', 'Improving performance of other sorting algorithms by pre-sorting and re-sorting smaller sublists', 'In-place sorting in systems with limited memory resources', 'Efficiently sorting data on disks or other external storage devices']","#include <stdio.h>
+#include <stdlib.h>
+#define N 10
+int arr[N] = {5, 2, 8, 1, 9, 3, 7, 6, 4};
+void shellsort(int* arr, int n){
+    int gap, i, j;
+gap = n / 2;
+while (gap > 0) {
+        for (i = gap; i < n; i++) {
+            j = i;
+            while ((j >= gap) && ((arr[j] - arr[j-gap]) > 0)) {
+                arr[j - gap] = arr[j];
+                j -= gap;
+            }
+            arr[j + gap] = arr[j];
+        }
+        gap /= 2;
+    }
+}
+
+int main(){
+    shellsort(arr, N);
+    for (int i = 0; i < N; ++i)
+        printf(""%d "", arr[i]);
+    return 0;
+}",[]
+Graph,"['Graph Data Structure', 'Network Graph', 'Adjacency List', 'Edge-Weighted Graph']",Data Structures,"A graph is a non-linear data structure consisting of nodes or vertices connected by edges. Each node represents an entity, and each edge represents a relationship between two entities. A graph can be directed (edges have direction) or undirected (edges do not have direction). The graph can also contain weights or labels on the edges to represent additional information.","['Allows for efficient representation of complex relationships', 'Can model real-world systems with many interactions', 'Supports various types of queries, such as shortest path and minimum spanning tree', 'Can be used for data compression and optimization', 'Enables visualization of large datasets', 'Facilitates clustering and community detection', 'Supports graph traversal algorithms like BFS and DFS', 'Can model dynamic systems with changing relationships']","['Requires significant memory to store edges and nodes', 'Queries can be computationally expensive for large graphs', 'Difficult to navigate and traverse for very large graphs', 'Does not handle insertions, deletions, or updates efficiently', 'Limited support for concurrent operations', 'Sensitive to data quality and noise in the graph']","['Social network analysis and recommendation systems', 'Traffic flow optimization and route planning', 'Recommendation engines and collaborative filtering', ""Web page ranking and link analysis (Google's PageRank algorithm)"", 'Biological network analysis and protein-protein interaction prediction', 'Traffic congestion detection and emergency response systems', 'Image processing and computer vision applications']","typedef struct Node { int data; struct Node* next; } Node;
+
+typedef struct Graph { int V, E; Node** adj_list; } Graph;
+
+void addEdge(Graph* graph, int src, int dest) {
+	graph->adj_list[src] = (Node*)realloc(graph->adj_list[src], sizeof(Node));
+	graph->adj_list[src]->data = dest;
+	graph->adj_list[src]->next = graph->adj_list[dest];
+}
+
+void printGraph(Graph* graph) {
+	for (int i = 0; i < graph->V; ++i)
+		printf(""Vertex %d\n"", i);
+	Node* temp;
+	for (int v = 0; v < graph->V; ++v)
+	{
+		emp = graph->adj_list[v];
+	or (; temp != NULL; temp = temp->next)
+		printf(""Edge (%d, %d)\n"", v, temp->data);
+	}
+}",[]
+Directed Graph,"['Directed Network', 'One-Way Graph', 'Oriented Graph']",Data Structures,"A directed graph is a type of graph where edges have direction. Each edge represents a one-way connection between two vertices, indicating the flow of information or relationship. Directed graphs are used to model situations where there is an order or precedence between relationships.","['Allows modeling of one-way relationships and dependencies', 'Can represent complex networks with multiple directions', 'Supports topological sorting and other algorithms for analyzing directed acyclic graphs (DAGs)', 'Enables efficient computation of shortest paths and minimum spanning trees', 'Suitable for modeling social networks, communication systems, and traffic flow', 'Easy to implement using adjacency matrices or linked lists', 'Can be used in various applications such as scheduling, planning, and optimization']","['Requires more memory than undirected graphs due to edge directionality', 'Can be difficult to visualize and analyze for large datasets', 'May require specialized algorithms for topological sorting and other tasks', 'Not suitable for applications where bidirectional relationships are necessary', 'Can lead to cycles, which may need to be detected and handled', 'More complex than undirected graphs in terms of implementation and analysis']","['Social network analysis: modeling friendships, followerships, and other relationships', 'Traffic flow analysis: representing one-way streets and traffic signals', 'Communication system design: modeling data transmission and routing', 'Scheduling algorithms: using topological sorting for efficient task scheduling', 'Planning and optimization: applying shortest paths and minimum spanning trees', 'Biology and epidemiology: modeling the spread of diseases through directed networks', 'Computer vision: analyzing image features and object relationships']","#include <stdio.h>
+#include <stdlib.h>
+
+// Define a structure for vertices and edges
+struct Vertex {
+    int id;
+    struct Edge* edges;
+};
+
+struct Edge {
+    int dest;
+    struct Edge* next;
+};
+
+// Function to add an edge between two vertices
+void add_edge(struct Vertex* v, int dest) {
+    // Create a new edge and append it to the list of edges
+    struct Edge* e = (struct Edge*) malloc(sizeof(struct Edge));
+    e->dest = dest;
+    e->next = v->edges;
+    v->edges = e;
+}
+
+// Function to print the adjacency list representation of a directed graph
+void print_graph(struct Vertex* vertices, int num_vertices) {
+    for (int i = 0; i < num_vertices; i++) {
+        printf(""Vertex %d: "", i);
+        struct Edge* e = vertices[i].edges;
+        while (e != NULL) {
+            printf(""-> %d"", e->dest);
+            e = e->next;
+        }
+        printf(""\n"");
+    }
+}
+
+int main() {
+    // Create a sample directed graph with 5 vertices and edges
+    struct Vertex vertices[5];
+    for (int i = 0; i < 5; i++) {
+        vertices[i].id = i;
+        vertices[i].edges = NULL;
+    }
+
+    add_edge(&vertices[0], 1);
+    add_edge(&vertices[0], 2);
+    add_edge(&vertices[1], 3);
+    add_edge(&vertices[2], 4);
+
+    print_graph(vertices, 5);
+    return 0;
+}",[]
+Undirected Graph,"['simple graph', 'non-oriented graph', 'unweighted graph', 'undirected network']",Data Structures,"An undirected graph is a type of graph in which the edges do not have direction. In other words, an edge (u, v) implies that there is a connection between vertices u and v, and also between vertices v and u. This means that every edge has two endpoints, but they are considered identical.","['Simplified edge representation', 'Reduced storage requirements compared to directed graphs', 'Faster traversal algorithms', 'More intuitive visualization', 'Easier to understand and analyze', 'Supports various graph operations', 'Can be used in many applications, including social networks and transportation systems']","['May require additional memory for storing edge weights or other attributes', 'Traversals may need to consider both directions of edges', 'Some algorithms assume a directed graph model', 'Limited applicability in scenarios where direction matters', 'More complex to implement certain operations, such as finding strongly connected components']","['Social network analysis: modeling friendships and relationships without considering direction', 'Transportation systems: representing roads and highways without distinguishing between one-way streets', 'Communication networks: designing communication protocols for undirected connections', 'Biology: modeling gene regulatory networks or protein interactions', 'Computer science: using undirected graphs to represent algorithmic problems, such as finding minimum spanning trees']","#include <stdio.h>#include <stdlib.h>typedef struct{ int v; struct edge *next;}vertex;typedef struct edge {int dest;struct edge *next;}edge;void add_edge(vertex **graph, int src, int dst){edge *new_edge = (edge *)malloc(sizeof(edge));new_edge->dest = dst;new_edge->next = (*graph)->edges;(*graph)->edges = new_edge;if ((*graph)->first == NULL){(*graph)->first = new_edge;}else{while ((*graph)->last->next != NULL){(*graph)->last = (*graph)->last->next;}(*graph)->last->next = new_edge;(*graph)->last = new_edge;}}void print_graph(vertex *graph){vertex *v;edge *e;if (graph == NULL){printf(""Empty graph\n"");}else{printf(""Graph:\n"");for (v = graph; v != NULL; v = v->next){printf(""Vertex %d:\n"", v->v);e = v->edges;while (e != NULL){printf(""Edge to vertex %d\n"", e->dest);e = e->next;}}}}
+int main(){vertex *graph = NULL;add_edge(&graph, 0, 1);add_edge(&graph, 1, 2);add_edge(&graph, 2, 3);print_graph(graph);
+return 0;}",[]
+Weighted Graph,"['Weighted Graph Data Structure', 'Edge-Weighted Graph', 'Graph with Weights']",Data Structures,"A weighted graph is a type of graph in which each edge has a weight or label associated with it, representing the cost or distance between the vertices connected by that edge. Weighted graphs can be used to model various real-world systems, such as transportation networks, social networks, and communication networks.","['Allows for efficient calculation of shortest paths between nodes', 'Supports determination of minimum spanning trees', 'Can handle negative weight edges, making it suitable for applications like finding the longest path in a graph', 'More accurate representation of real-world systems than unweighted graphs', 'Flexible and adaptable to different problem domains', 'Provides more information about the relationships between nodes', ""Supports various algorithms like Dijkstra's algorithm and Bellman-Ford algorithm"", 'Can be used for modeling complex systems with multiple attributes', 'Allows for efficient implementation of graph traversal algorithms']","['More computationally intensive than unweighted graphs due to the need to handle weights', 'Requires more memory to store edge weights', 'May not be suitable for very large datasets due to increased computational complexity', 'Difficult to visualize and understand without proper representation tools', 'Can lead to increased complexity in algorithms and data structures', 'Not all algorithms can take advantage of the weighted information', 'More susceptible to errors if edge weights are not properly assigned or updated', 'May require more resources for certain operations like shortest path calculation']","['Network analysis and modeling (e.g., social networks, transportation systems)', 'Recommendation systems based on similarity metrics', 'Machine learning algorithms that rely on graph structures', 'Computing the minimum spanning tree of a weighted graph', 'Finding the longest path in a directed acyclic graph', 'Traffic simulation and optimization using graphs with edge weights', 'Resource allocation problems in supply chain management', 'Determining the optimal path in a complex network like the internet']","typedef struct { int src, dest; double weight; } Edge;
+
+int main() {
+	// Initialize graph with vertices and edges
+	int V = 5, E = 7;
+	Edge edges[] = {{0, 1, 2.5}, {0, 2, 1.8}, {1, 3, 4.2}, {1, 4, 3.1}, {2, 4, 6.1}, {3, 4, 7.9}, {3, 0, 2.5}};
+	// Create adjacency list representation
+	int* adj[5] = {{0}, {1, 2, 3, 4}, {1, 4}, {0, 1, 4}, {0, 2, 3, 4}};
+	
+	// Implementation of Dijkstra's algorithm to find shortest paths
+	int dist[V];
+	bool visited[V];
+	for(int i = 0; i < V; i++) {
+		visited[i] = false;
+	}
+	
+	dist[0] = 0;
+	for(int i = 0; i < V; i++) {
+		// Relax edges to find shortest paths
+		int u = -1, v = -1;
+		double minWeight = INFINITY;
+		for (int j = 0; j < E; j++) {
+			if (!visited[edges[j].src] && edges[j].weight < minWeight) {
+				pair<int, int> temp = {edges[j].src, edges[j].dest};
+				u = temp.first;
+				v = temp.second;
+				minWeight = edges[j].weight;
+			}
+		}
+		if (u == -1 || v == -1) break;
+		visited[u] = true;
+		for(int k = 0; k < adj[v].size(); k++) {
+			int w = adj[v][k];
+			if (!visited[w]) {
+				// Update distance for adjacent vertex
+				dist[w] += edges[edges[j].src == u ? j + 1 : j - 1].weight;
+			}
+		}
+	}
+	for(int i = 0; i < V; i++) {
+		printf(""Vertex %d: Shortest distance from source vertex \n"", i);
+	}
+eturn 0;
+}",[]
+Adjacency Matrix,"['adjacency matrix representation', 'adjacency matrix data structure', 'matrix-based graph representation']",Data Structures,"An adjacency matrix is a square matrix used to represent a finite graph. The entries of the matrix indicate whether pairs of vertices are adjacent or not. If there is an edge between two vertices i and j, then the entry at row i and column j (or vice versa) is typically denoted by a 1; otherwise, it may be 0 or another value depending on the specific implementation.","['Efficient representation of sparse graphs', 'Easy to implement graph operations such as edge addition and removal', 'Simple to compute shortest paths using matrix multiplication', 'Can be used for finding strongly connected components in a graph', 'Supports efficient traversal of the graph through matrix exponentiation', 'Suitable for applications where the graph is static or changes infrequently', 'Has a low memory footprint compared to other data structures like adjacency lists', 'Well-suited for dense graphs, as most entries can be stored in a compact binary format']","['Inefficient representation of very large sparse graphs due to memory usage and computation time', 'Matrix operations can be computationally expensive for large graphs', 'Less intuitive than adjacency lists for graph traversal and manipulation', 'May have issues with scalability and performance when dealing with massive graphs', 'Not suitable for applications where the graph is highly dynamic or has a complex structure']","['Network analysis and modeling, especially in social network analysis and web graph analysis', 'Computational geometry and spatial analysis, such as map algebra operations', 'Machine learning and data mining, particularly in the context of graph-based methods', 'Bioinformatics and computational biology, like protein interaction networks and gene regulatory networks']","int main() {
+  int adjacencyMatrix[5][5] = {{0, 1, 0, 0, 0},
+                                     {1, 0, 1, 0, 0},
+                                     {0, 1, 0, 1, 0},
+                                     {0, 0, 1, 0, 1},
+                                     {0, 0, 0, 1, 0}};
+
+  // Example usage: check if there's an edge between vertices 2 and 4
+  printf(""%d\n"", adjacencyMatrix[2][4]);
+  return 0;
+}",[]
+Adjacency List,"['Neighbor List', 'Vertex-Edge Adjacency Matrix', 'Linked Representation']",Data Structures,"A data structure used to represent a graph, where each vertex is associated with a list of its adjacent vertices. This representation allows for efficient insertion and deletion of edges between vertices.","['Efficient storage and retrieval of edge information', 'Simple implementation and understanding', 'Fast lookup and traversal of adjacent vertices', 'Supports dynamic graph updates', 'Flexible data structure for various graph algorithms']","['Memory-intensive for large graphs due to repeated vertex representations', 'Difficult to visualize and manipulate the graph structure', 'Limited support for certain graph operations, such as finding shortest paths', 'Can be slow for sparse graphs with many empty adjacency lists', 'Not suitable for very large graphs due to memory constraints']","['Network analysis and visualization in social networks, web graphs, or electrical circuits', 'Finding connected components and strongly connected components in a graph', ""Implementing graph algorithms such as Dijkstra's algorithm and Prim's algorithm"", 'Representing and manipulating road maps and traffic patterns', 'Scheduling and resource allocation problems with dependencies']","typedef struct Node { int data; struct Node* next; } Node;
+
+typedef struct Graph { int numVertices; Node** adjacencyLists; } Graph;
+
+Graph createGraph(int numVertices) {
+	Graph graph = (Graph)malloc(sizeof(Graph));
+	graph.numVertices = numVertices;
+	graph.adjacencyLists = (Node**)calloc(numVertices, sizeof(Node*));
+	for (int i = 0; i < numVertices; i++) graph.adjacencyLists[i] = NULL;
+	return graph;
+}
+
+void addEdge(Graph graph, int src, int dest) {
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->data = dest;
+	newNode->next = graph.adjacencyLists[src];
+	graph.adjacencyLists[src] = newNode;
+}
+
+void printGraph(Graph graph) {
+	for (int i = 0; i < graph.numVertices; i++) {
+		printf(""Vertex %d: "", i);
+		Node* temp = graph.adjacencyLists[i];
+		while (temp != NULL) {
+			printf(""%d ->","['Use of adjacency lists is particularly useful in sparse graphs, where the number of edges is much less than the total number of possible edges.', 'In practice, adjacency lists are often used alongside other data structures, such as an array or map, to efficiently store and retrieve vertex information.', 'The choice between using an array-based representation and an adjacency list representation depends on the specific application and the properties of the graph.', 'In many cases, it is beneficial to use both an adjacency matrix and an adjacency list representation for a graph, depending on the operation being performed.']"
+Depth First Search,"['DFS traversal', 'Pre-order traversal', 'Depth-first traversal']",Algorithms,A graph traversal technique that visits a node and then explores as far as possible along each of its edges before backtracking.,"['Efficient for small graphs or trees with a large number of edges', 'Can be used to detect cycles in a graph', 'Uses less memory compared to Breadth-First Search', 'Suitable for searching a graph that is not too dense', 'Simple to implement and understand', 'Can handle very large graphs if implemented correctly']","['Fails to find the shortest path between two nodes', 'May get stuck in an infinite loop if the graph has cycles', 'Not suitable for graphs with a very high number of edges', 'Does not guarantee to visit all nodes in the graph', 'Can be slow on large graphs due to backtracking', 'May not find the optimal solution', 'Depends heavily on the order of node visits']","['Finding connected components in a graph', 'Detecting strongly connected components in a graph', 'Topological sorting of a directed acyclic graph (DAG)', 'Solving mazes and puzzles', 'Finding minimum spanning tree in a graph', 'Testing whether a graph is bipartite or not']","int visited[100];
+int dfs(int v, int graph[100][100], int n)
+{
+visited[v] = 1;
+for (int i = 0; i < n; i++)
+{
+if (graph[v][i] == 1 && !visited[i])
+{
+if (dfs(i, graph, n) == -1)
+return -1;
+}
+}
+return 1;
+}
+int main()
+{
+int n = 5; // number of vertices
+int graph[100][100]; // adjacency matrix representation
+// Initialize graph and call dfs function from a starting vertex
+}",[]
+Breadth First Search,"['BFS', 'Graph Traversal Algorithm', 'Level Order Traversal']",Algorithms,"A Breadth-First Search (BFS) is a graph traversal algorithm that explores all the neighbor nodes at the present depth prior to moving on to nodes at the next depth level. It starts from a given source node and traverses all of its immediate neighbors before visiting their neighbors, and so on.","['Efficient in finding the shortest path between two nodes', 'Visits each node exactly once', 'Suitable for graphs with a large number of nodes', 'Easy to implement', 'Fast for sparse graphs', 'Can be used for graph traversal in various applications']","['Not suitable for very large graphs due to high memory requirements', 'Time complexity is O(|E| + |V|) in the worst case', 'May not perform well on graphs with a large number of edges', 'Space complexity is O(|V|) due to the need to store visited nodes', 'Not suitable for finding the minimum spanning tree']","['Web crawlers use BFS for traversing web pages', 'Social network analysis uses BFS to find close friends', 'Network topology discovery uses BFS to discover adjacent devices', 'Finding connected components in a graph uses BFS', 'Shortest path problems such as finding the minimum distance between two nodes']","#include <stdio.h>#include <stdlib.h>typedef struct Node { int data; struct Node* next;} Node;
+
+void BFS(Node* root) {
+    if (root == NULL) return;
+
+    // Create a queue to hold nodes and enqueue the root node
+    Node** q = (Node**)malloc(100 * sizeof(Node*));
+    int front = 0, rear = 1; q[front] = root;
+
+    while (front != rear) {
+        // Dequeue a node from the queue
+        Node* current_node = q[front]; front++; 
+
+        // Process the dequeued node (print its data)
+        printf(""%d\n"", current_node->data);
+
+        // Enqueue all adjacent nodes to the dequeued node
+        if (current_node->next != NULL) {
+            Node* next_node = current_node->next; q[rear] = next_node;
+            rear++;
+        }
+    }
+}
+
+// Create a sample graph and call BFS on it
+Node* createNode(int data) { Node* node = (Node*)malloc(sizeof(Node)); node->data = data; return node;}
+
+int main() {
+    Node* root = createNode(0);
+    root->next = createNode(1); root->next->next = createNode(2);
+    root->next->next->next = createNode(3);
+
+    BFS(root);
+    return 0;
+}",[]
+Topological Sort,"['Ordering of Directed Acyclic Graphs', 'Postorder Traversal in DAG', 'Linearization of Partially Ordered Sets']",Algorithms,"A topological sort is a linear ordering of vertices in a directed acyclic graph (DAG) such that for every edge (u,v), vertex u comes before v in the ordering.","['Provides a valid order for tasks with dependencies', 'Can be used to schedule jobs or tasks', 'Helps in resolving conflicts between parallel activities', 'Easy to implement using depth-first search (DFS)', 'Supports efficient implementation on large graphs']","['Not suitable for cyclic graphs due to infinite loops', 'May not preserve the original order of vertices with no edges', 'Requires additional space for storing the ordering', 'May not work efficiently for very large graphs']","['Scheduling tasks or jobs in a workflow management system', 'Linearizing partially ordered sets (POSets) in software development', 'Resolving dependencies between modules in a program', 'Topological analysis of biological networks', 'Ordering vertices in a knowledge graph for search engines']","#include <stdio.h>
+
+// Define the structure for a directed graph edge
+struct Edge {
+    int v;
+    int next;
+};
+
+// Function to perform topological sort using DFS
+void dfs(int u, int* visited, int* ordering, int* index)
+{
+    visited[u] = 1;
+    // Visit all adjacent vertices of 'u'
+    for (int i = head[u]; i >= 0; i = edges[i].next) {
+        int v = edges[i].v;
+        if (!visited[v])
+            dfs(v, visited, ordering, index);
+    }
+    // Add vertex to the result list
+    *index = (*index + 1) % MAX_ORDERING;
+    ordering[*index] = u;
+}
+
+// Function to initialize graph edges and perform topological sort
+void initGraph(int numVertices, int** head, int* ordering, int MAX_ORDERING)
+{
+    // Initialize visited array and result list
+    for (int i = 0; i < numVertices; ++i) {
+        visited[i] = 0;
+        head[i] = -1;
+    }
+
+    // Add edges to the graph
+    for (int i = 0; i < numEdges; ++i) {
+        edges[i].v = edgeDest[i];
+        if (head[edgeSrc[i]] == -1)
+            head[edgeSrc[i]] = i;
+    }
+
+    // Perform DFS to get the ordering
+    for (int i = 0; i < numVertices && *index < MAX_ORDERING; ++i) {
+        if (!visited[i])
+            dfs(i, visited, ordering, &index);
+    }
+}
+
+// Function to print the topological order
+void printOrdering(int* ordering, int MAX_ORDERING)
+{
+    for (int i = 0; i < *index; ++i)
+        printf(""%d\n"", ordering[i]);
+}",[]
+Dijkstra Algorithm,"['Shortest Path Algorithm', 'Minimum Distance Algorithm', 'Graph Search Algorithm']",Algorithms,"The Dijkstra algorithm is a graph search algorithm that finds the shortest path between nodes in a graph. It works by maintaining a priority queue of nodes, where the priority of each node is its minimum distance from the starting node. The algorithm repeatedly extracts the node with the minimum priority and updates the distances to its neighbors.","['Deterministic and guaranteed to find the shortest path', 'Suitable for sparse graphs', 'Easy to implement and understand', 'Can be parallelized for large graphs', 'Adaptable to different graph structures', 'Provides a clear ordering of nodes by distance', 'Efficient in terms of time complexity (O(|E| + |V|log|V|))', 'Can be modified for multiple-source shortest paths', 'Supports edge weights and non-negative distances', 'Able to handle graphs with negative weight edges']","['Sensitive to initial node choice', 'Not suitable for very large or dense graphs', 'May get stuck in local optima if not implemented carefully', 'Does not take into account other optimization criteria (e.g., fewest edges)', 'Not directly applicable to non-acyclic graph structures', 'Requires careful handling of edge weights and distance updates', 'Assumes the existence of a shortest path between nodes', 'Might require a large amount of memory for complex graphs']","['Network routing protocols (e.g., OSPF, RIP)', 'Traffic flow optimization in transportation networks', 'Shortest path calculation in road networks or maps', 'Resource allocation and scheduling problems', 'Wireless sensor network localization', 'Distance-based clustering algorithms (e.g., DBSCAN)', 'Computing the shortest path between two points in a map', 'Route planning and trip suggestion services', 'Vehicle routing problem solvers', 'Time-dependent shortest path calculation']","int main() {
+	struct edge { int v, w; } edges[] = {{0, 5}, {1, -3}, {2, 7}, {3, 10}};
+	param int V = 4, E = sizeof(edges) / sizeof(edges[0]);
+	param int dist[V];
+	for (int i = 0; i < V; ++i) {
+		if(i == 0)
+dist[i] = 0;
+		else
+			dist[i] = INT_MAX;
+	}
+	struct edge temp = {0, -1};
+	for (int i = 0; i < V-1; ++i) {
+		temp.w = INT_MAX;
+		for (int j = 0; j < E; ++j)
+			if(edges[j].w > temp.w && edges[j].v == i+1)
+				emp = edges[j];
+		edges[i].w += dist[i];
+	}
+	for (int i = 0; i < V; ++i) 
+	printf(""Vertex %d : %d\n"", i, dist[i]);
+	return 0;
+}",[]
+Bellman-Ford Algorithm,"['Bellman-Ford', 'Successor Queue', 'Distance Labels']",Algorithms,"The Bellman-Ford algorithm is a graph search algorithm that finds the shortest path from a source vertex to all other vertices in a weighted graph. It works by maintaining a distance label for each vertex, which represents the minimum distance from the source vertex to that vertex.","['Handles negative weight edges', 'Can detect negative cycles', 'Works with any type of edge weights (integers or floats)', 'Finds shortest paths in weighted graphs', 'Has a time complexity of O(VE), where V is the number of vertices and E is the number of edges', 'Is suitable for graphs with few edges', 'Can handle disconnected graphs']","[""Not as efficient as Dijkstra's algorithm for positive weight edges"", 'Has a high memory usage due to distance labels', 'Does not work well with very large graphs', 'Has a complex implementation due to handling of negative cycles', 'Requires multiple passes through the graph', 'Finds shortest paths, but not necessarily optimal paths']","['Network analysis and optimization', 'Shortest path problems in logistics and transportation', 'Resource allocation and scheduling', 'Traffic management and routing', 'Scientific computing and numerical simulations', 'Predictive modeling and forecasting', 'Web search engines and link analysis']","void bellman_ford(int V, int E, int* graph[], int source) {
+int dist[V];
+for (int i = 0; i < V; ++i)
+dist[i] = INT_MAX;
+dist[source] = 0;
+for (int v = 0; v < V - 1; ++v)
+{
+for (int u = 0; u < V; ++u)
+if (dist[u] != INT_MAX && graph[u][v] != 0)
+{
+current_distance = dist[u] + graph[u][v];
+if (current_distance < dist[v])
+dist[v] = current_distance;
+}
+}
+for (int u = 0; u < V; ++u)
+{
+current_distance = -1;
+for (int v = 0; v < V; ++v)
+if (graph[u][v] != 0 && dist[u] + graph[u][v] < dist[v])
+{
+current_distance = dist[u] + graph[u][v];
+dist[v] = current_distance;
+}
+if (current_distance == -1) return; // Negative cycle detected
+}
+// Print distances
+printf(""Vertex\tDistance from source\n"");
+for (int i = 0; i < V; ++i)
+printf(""%d\t%d\n"", i, dist[i]);}","['The Bellman-Ford algorithm can be used to detect negative cycles in a graph.', 'Negative cycles can cause problems in certain applications, such as resource allocation and scheduling.', 'To handle very large graphs, the algorithm can be modified to use a priority queue instead of an array-based distance label data structure.', 'The algorithm has been implemented in various programming languages, including C++, Java, and Python.']"
+Floyd Warshall Algorithm,"['Shortest Path Problem', 'Dynamic Programming for Shortest Paths', 'Weighted Graphs']",Algorithms,"The Floyd-Warshall algorithm is an efficient algorithm for finding the shortest paths in a weighted, directed graph with positive or negative edge weights. It works by iteratively improving an estimate of the shortest path between each pair of nodes until the estimate is optimal.","['Finds shortest paths in O(n^3) time complexity', 'Works with both positive and negative weight edges', 'Handles graphs with cycles', 'Can be used for finding minimum spanning trees', 'Efficient for dense graphs', 'Simple to implement', 'Scalable for large graphs']","['Not suitable for very large graphs due to high time complexity', 'Does not handle graphs with negative weight cycles', 'Requires a lot of memory for large graphs', 'May not be efficient for sparse graphs', 'Time complexity can be high for some cases', 'May require additional preprocessing for some applications']","['Route planning in transportation networks', 'Network optimization problems', ""Dijkstra's algorithm extension for negative weights"", 'Circuits and shortest paths in electrical engineering', 'Traffic management systems', 'Scheduling problems in operations research', 'Minimum spanning tree problem', 'Shortest path problems in logistics', 'Optimization of supply chains']","int main() {
+	int V = 4; // number of vertices
+	int INF = 999; // infinity
+	int dist[5][5] = {{0,10,INF,INF,INF},{INF,0,35,3,INF},{INF,INF,0,28,IFN},{INF,INF,INF,0,16},{INF,INF,INF,INF,0}};
+	for (int k = 0; k < V; k++)
+	{
+		for (int i = 0; i < V; i++)
+		{
+			for (int j = 0; j < V; j++)
+			{
+				if ((dist[i][k] + dist[k][j]) < dist[i][j])
+				{dist[i][j] = dist[i][k] + dist[k][j];}
+				}
+			}
+		}
+	for (int i = 0; i < V; i++)
+	{
+		printf(""Vertex %d "",i);
+		for (int j = 0; j < V; j++)
+		{
+			if (dist[i][j] != INF)
+			{printf(""	Shortest distance from %d to %d is %d\n"", i, j, dist[i][j]);}
+			else
+			{printf(""\tNo path from %d to %d \n"",i,j);}
+		}
+	}
+	return 0;
+}",[]
+Kruskal Algorithm,"['Minimum Spanning Tree', 'MST Algorithm', ""Kruskal's Algorithm"", 'Minimum Weight Spanning Tree']",Algorithms,"The Kruskal algorithm is a greedy algorithm in graph theory that finds the minimum spanning tree for a connected weighted undirected graph. It works by selecting the smallest available edge that does not form a cycle, and adding it to the spanning tree.","['It has a low time complexity of O(E log E) or O(E log V), where E is the number of edges and V is the number of vertices.', 'It is easy to implement and understand.', 'It can be used for both directed and undirected graphs.', 'It can handle negative weight edges, but it requires some modifications.', 'It can be used for finding the minimum spanning tree of a graph.']","['It may not work correctly if the input graph has multiple connected components.', 'It may not work correctly if the input graph is disconnected.', 'It does not handle negative weight edges correctly, unless some modifications are made.', 'It requires extra memory to store the data structure used for the disjoint-set data type.', 'It can be slow for very large graphs.']","['Finding the minimum spanning tree of a network.', 'Solving the traveling salesman problem.', 'Determining the shortest path between nodes in a graph.', 'Clustering similar objects in a dataset.', 'Assigning tasks to workers with different capabilities and costs.']","typedef struct edge { int u, v; int w; } edge;
+int find(int i, int* parent) { return (parent[i] == i) ? i : find(parent[i], parent);
+}
+default void union_(int x, int y, int* parent, int* rank) {
+if (rank[x] < rank[y])
+{
+parent[x] = y;
+}
+else if (rank[x] > rank[y])
+{
+parent[y] = x;
+rank[x]++;
+}
+else
+{
+parent[y] = x;
+rank[x]++;
+}}
+default int kruskal(edge edges[], int m, edge* MST) {
+int i, j, V; 
+int parent[m], rank[m];
+V = sqrt(m);
+for (i = 0; i < m; i++)
+{
+pin parent[i] = i;
+rank[i] = 0;
+}
+sort(edges, edges + m, compareEdges);
+i = 0;
+j = 0;
+while (i < m && j < V)
+{
+if (find(edges[i].u, parent) != find(edges[i].v, parent))
+{
+MST[j++] = edges[i];
+union_(edges[i].u, edges[i].v, parent, rank);
+}
+++i;
+}
+sort(MST, MST + V, compareEdges);
+for (i = 0; i < V - 1; ++i)
+{
+if (MST[i].w >= MST[i+1].w) 
+return 0;
+}
+return 1;
+}
+default int compareEdges(const edge* a, const edge* b) { return a->w < b->w; }
+int main() {
+ege edges[100];
+kruskal(edges, 100, MST);
+return 0;
+}",[]
+Prim Algorithm,"['Minimum Spanning Tree', ""Kruskal's Algorithm"", 'MST Algorithm', 'Greedy Algorithm for MST']",Algorithms,"The Prim algorithm is a greedy algorithm that finds the minimum spanning tree of a connected, undirected and weighted graph. It works by selecting arbitrary vertices and adding the minimum-weight edge connecting them to the growing tree.","['Efficient for sparse graphs with small number of edges', 'Guaranteed to find the optimal solution', 'Simple to implement', 'Suitable for finding minimum spanning tree in a graph']","['May not perform well on dense graphs or with many vertices', 'Not suitable for graphs with negative-weight edges', 'Time complexity can be high (O(E log V) in the worst case)', 'Space complexity is O(V + E)']","['Finding minimum spanning trees in network optimization problems', 'Designing communication networks such as internet routing protocols', 'Scheduling tasks with dependencies and time constraints', 'Optimizing resource allocation in distributed systems']","char graph[5][5] = {{0,10,0,0,0},{10,0,6,0,0},{0,6,0,5,0},{0,0,5,0,8},{0,0,0,8,0}};
+int visted[5];
+int key[5];
+int parent[5];
+int mindist[5] = {99999};
+mindist[0] = 0;
+visted[0] = true;
+key[0] = 0;
+for(int i=1;i<5;i++){
+mindist[i] = graph[0][i];
+key[i] = i;
+parent[i] = -1;
+}
+while(true){
+int u = findMin(key,mindist);
+if(mindist[u] == 99999)
+break;
+visted[u] = true;
+for(int v=0;v<5;v++){
+if(graph[u][v] != 0 && !visted[v]){ 
+mintemp = mindist[u]+graph[u][v];
+if(temp < mindist[v]){
+mindist[v] = temp;
+parent[v] = u;
+key[v] = v;
+}
+}}}",[]
+Disjoint Set Union,"['Union-Find algorithm', 'Connected Components algorithm', 'Equivalence Partitioning']",Algorithms,"A disjoint set union is a data structure that keeps track of a partition of a set into a number of non-overlapping (or disjoint) subsets, with the ability to merge two sets at any given time. It maintains the connected components in an undirected graph.","['Efficient merging and finding operations', 'Supports dynamic changes to the set structure', 'Can be used for various applications such as minimum spanning tree and shortest path algorithms', 'Has a low memory footprint', 'Fast performance due to amortized time complexity of O(α(n))', 'Can handle large datasets with ease', 'Easy to implement and understand', 'Provides an efficient way to manage complex relationships between elements', 'Supports operations on large-scale data', 'Flexible in its application']","['Difficult to visualize for those without prior experience', 'Can be challenging to implement for beginners due to the complexity of the algorithm', 'Requires careful consideration and planning to optimize performance', 'May not perform optimally on extremely large datasets', 'The union-find data structure does not directly support deletion operations', 'The time complexity can degrade in certain scenarios', 'Not suitable for applications requiring precise numerical computations', 'Implementation errors can lead to decreased performance', 'Can be resource-intensive if implemented incorrectly', 'Limited ability to handle parallel processing']","[""Minimum spanning tree algorithms such as Kruskal's algorithm and Prim's algorithm"", ""Shortest path algorithms including Dijkstra's algorithm and Bellman-Ford algorithm"", 'Connected components in graph theory, especially for finding strongly connected components in a directed graph', 'Eulerian paths and circuits in graphs', 'Graph coloring problems and planarity testing', 'Network flow problems such as the maximum flow problem', 'Finding articulation points in undirected graphs', 'Minimum cycle basis in graphs', 'Planarization of non-planar graphs', 'Identifying cliques and bicliques in a graph']","typedef struct {int* parent; int* rank;} DSU;
+void make_set(DSU* dsu, int x) {dsu->parent[x] = x; dsu->rank[x] = 0;}
+
+int find(DSU* dsu, int x)
+{
+if (dsu->parent[x] != x)
+{
+dsu->parent[x] = find(dsu, dsu->parent[x]);
+}
+return dsu->parent[x];
+}
+void union_sets(DSU* dsu, int x, int y)
+{
+int root_x = find(dsu, x), root_y = find(dsu, y);
+if (root_x != root_y)
+{
+ds->parent[root_x] = root_y;
+if (dsu->rank[root_x] > dsu->rank[root_y])
+dsu->rank[root_y]++;
+else if (dsu->rank[root_x] < dsu->rank[root_y])
+ds->rank[root_x]++;
+}
+}",[]
+Dynamic Programming,"['Memoization', 'Bottom-Up Approach', 'Optimization Technique']",Algorithms,"Dynamic programming is an algorithmic technique used to solve complex problems by breaking them down into simpler subproblems, solving each subproblem only once, and storing their solutions to avoid redundant computation.","['Breaks down complex problems into manageable subproblems', 'Avoids redundant computation through memoization', 'Optimizes problem-solving time complexity', 'Reduces memory usage by reusing computed values', 'Suitable for problems with overlapping subproblems', 'Easy to implement and maintain', 'Scalable to large inputs']","['Requires careful selection of subproblems and their order', 'May not be suitable for problems with no overlap between subproblems', 'Can become complex to implement for very large inputs', 'May require significant memory usage for memoization', 'Not all problems can be solved using dynamic programming', 'May have high constant factors due to overhead of memoization']","['Solving optimization problems, such as the knapsack problem or the longest common subsequence problem', 'Computing Fibonacci numbers efficiently', 'Optimizing algorithms for sequence alignment', 'Finding the shortest path in a graph with negative weights', 'Solving dynamic systems, such as electrical circuits or population growth models']","int fib(int n) {
+    if (n <= 1) return n;
+    int* memo = (int*)malloc((n + 1) * sizeof(int));
+    memo[0] = 0;
+    memo[1] = 1;
+    for (int i = 2; i <= n; ++i)
+        memo[i] = memo[i - 1] + memo[i - 2];
+    int result = memo[n];
+    free(memo);
+    return result;
+}",[]
+Greedy Algorithm,"['greedy method', 'greedy strategy', 'optimistic algorithm', 'maximum gain approach']",Algorithms,"A greedy algorithm is a simple, intuitive algorithmic paradigm that makes the optimal choice at each stage with the hope of finding a global optimum solution. It works by making the locally optimal choice at each step with the goal of achieving a globally optimal solution.","['Easy to implement', 'Simple to understand and visualize', 'Fast execution time in many cases', 'Sufficient for solving problems that have a clear, easy-to-spot optimal solution', 'Can be used as a starting point for more complex algorithms']","['May not always produce the global optimum solution', 'Can get stuck in local optima and fail to find the best possible solution', 'Requires careful analysis of problem properties to determine suitability', 'Not suitable for problems with multiple optimal solutions or without a clear optimal solution', 'Does not adapt well to changing requirements']","['Scheduling tasks or jobs with varying processing times and priorities', 'Resource allocation in systems with limited resources', 'Making the minimum number of moves to solve puzzles like the Tower of Hanoi', 'Solving problems related to knapsack capacity and item weights', 'Shortest path problems in network optimization']","#include <stdio.h>
+
+int main() {
+    int coins[] = {25, 10, 5, 1};
+    int coinValues[] = {0.25, 0.10, 0.05, 0.01};
+    float amount = 0.37;
+    int count[4] = {0, 0, 0, 0};
+
+    for (int i = 3; i >= 0; i--) {
+        while (amount >= coinValues[i]) {
+            amount -= coinValues[i];
+            count[i]++;
+        }
+    }
+
+    printf(""Greedy Algorithm Result:\n"");
+    for (int i = 3; i >= 0; i--) {
+        if (count[i] > 0) {
+            printf(""%d coins of %.2f value\n"", count[i], coinValues[i]);
+        }
+    }
+
+    return 0;
+}",[]
+Backtracking,"['backtrack', 'recursion with backtracking', 'trying all possibilities']",Algorithms,"A problem-solving strategy that involves trying all possible solutions and backtracking when a solution is not feasible, typically used for solving problems with constraints.","['Effective in solving constraint satisfaction problems', 'Can be used to solve complex optimization problems', 'Helps in avoiding dead ends by considering multiple possibilities', 'Reduces the need for manual search and testing', 'Easy to implement using recursive functions']","['Can be computationally expensive due to repeated calculations', 'Not suitable for problems with large search spaces', 'May get stuck in an infinite loop if not implemented carefully', 'Requires a lot of memory to store all possible solutions', 'Can be slow for problems with many constraints']","['Solving puzzles like Sudoku, crosswords, and word scrambles', 'Finding the shortest path in a maze or graph', 'Testing all possible moves in games like chess or checkers', 'Optimizing scheduling and resource allocation problems', 'Generating permutations of items with constraints']","```
+#include <stdio.h>
+
+void backtrack(int arr[], int start, int end) {
+  if (start == end) {
+    printf(""Solution found: "");
+    for (int i = 0; i <= end; i++)
+      printf ""%d\n"", arr[i];
+    return;
+  }
+
+  // Try all possible values for the current position
+  for (int value = start; value <= end; value++) {
+    arr[start] = value;
+    backtrack(arr, start + 1, end);
+  }
+}
+
+int main() {
+  int n = 5;
+  int arr[n];
+  backtrack(arr, 0, n - 1);
+  return 0;
+}
+```","['Backtracking can be implemented using both iterative and recursive approaches.', ""It's essential to keep track of the search path to avoid duplicate solutions."", 'The algorithm should terminate when all possibilities have been exhausted or a valid solution is found.']"
+Divide and Conquer,[],,,[],[],[],,[]
+Knuth Morris Pratt Algorithm,"['KMP algorithm', 'string matching algorithm', 'pattern searching algorithm']",Data Structures,"The Knuth-Morris-Pratt (KMP) algorithm is a string searching algorithm that uses the observation that when a mismatch occurs, the information about the mismatch can be used to skip characters in the text and/or pattern at least by one position for the next comparison. It preprocesses the pattern as well as the text before processing them together.","['Efficient for searching patterns in strings', 'Preprocesses the pattern and text efficiently using ε-values', 'Uses O(m) space where m is the length of the pattern', 'Has a time complexity of O(n + m)', 'Can handle multiple queries', 'Works well with both exact and partial matches', 'Handles overlapping matches without any issues', 'Has been implemented in various programming languages', 'Has several applications in string matching problems']","['Requires pre-processing of the pattern which adds to the overall time complexity', 'Not suitable for small patterns where pre-processing is overhead', 'Does not work well with very large texts or patterns', 'Assumes that input strings are ASCII (or UTF-8) encoded', 'Has a high number of comparisons when the mismatch occurs at the end', 'No support for wildcard characters in the pattern', 'Not suitable for multi-threaded environments due to its sequential nature']","['Searching patterns in strings, such as plagiarism detection', 'Text searching and matching applications', 'Data compression algorithms like Huffman coding', 'String matching with wildcards or regular expressions', 'DNA sequence alignment', 'Fingerprinting and DNA matching', 'Web search engines for pattern matching', 'Regular expression engines for pattern matching']","#include <stdio.h>
+#include <string.h>
+
+int main() {
+char text[] = ""abcdababababac"";
+char pattern[] = ""abcab"";
+int M = strlen(pattern);
+int N = strlen(text);
+int lps[M];
+lps[0] = 0;
+int length = 1;
+int i = 1;
+while (i < M) {
+if (pattern[i] == pattern[length - 1]) {
+length++;
+lp[s[i] = length;
+i++;
+} else {
+if (length != 0) {
+length = lps[length - 1];
+}
+else {
+lp[s[i] = 0;
+i++;
+}
+}
+int i = 0;
+int j = 0;
+while (i < N) {
+if (pattern[j] == text[i]) {
+j++;
+if (j == M) {
+printf(""
+Pattern found at position %d\n"", i - j + 1);
+j = lps[j-1];
+}
+i++;
+} else if (j != 0) {
+j = lps[j - 1];
+} else {
+// Ordinary mismatch
+i++;
+}
+return 0;
+}",[]
+Rabin Karp Algorithm,"['String Matching Algorithm', 'Rolling Hash Algorithm', 'Pattern Searching Algorithm']",Data Structures,The Rabin-Karp algorithm is a string searching algorithm that uses hashing to find any one of a set of pattern strings in a text. It uses a rolling hash function to efficiently calculate the hash value of substrings and to quickly compare them with the precomputed hash values of the patterns.,"['Efficient use of memory', 'Fast average-case performance', 'Can be used for multiple patterns at once']","['May produce false positives', 'Requires extra space for hash table', 'Not suitable for real-time applications']","['Text editors', 'Search engines', 'Pattern recognition in DNA sequences']","int text[] = { 'T', 'E', 'S', 'T' }; int pattern[] = { 'T', 'E', 'S', 'T' }; int n = strlen(text); int m = strlen(pattern); long d = 1; for (int i = 0; i < m - 1; i++) d = (d * 256) % (long)pow(10,9)+7; long h = 0; for (int i = 0; i < m; i++) { h = (h + ((long)(text[i])) * d % (long)pow(10,9)+7) % (long)pow(10,9)+7; } long p = 0; for (int i = 0; i < m; i++) { p = (p + ((long)(pattern[i])) * d % (long)pow(10,9)+7) % (long)pow(10,9)+7; } int i; for (i = 0; i <= n - m; i++) { if (h == p && match(text, pattern, i, m)) return i; if (i < n - m) { h = (d * ((long)(text[i + m]) - (long)(text[i])) % (long)pow(10,9)+7) % (long)pow(10,9)+7 + h; } } return -1;",[]
+Longest Common Subsequence,"['LCS problem', 'longest common substring problem', 'common subsequence']",Algorithms,"Given two sequences, the longest common subsequence (LCS) is the longest sequence that appears in both input sequences. The LCS is a contiguous subsequence of the input sequences.","['Efficiently solves the problem of finding similar patterns between two sequences', 'Can be used to detect plagiarism and other forms of text similarity', 'Has applications in data compression, pattern recognition, and computational biology', 'Can be implemented using dynamic programming for efficient computation', 'Has a time complexity of O(n*m), where n and m are the lengths of the input sequences', 'Has a space complexity of O(n*m) due to the dynamic programming table', 'Can be parallelized for large-scale computations', 'Robust against noise and variations in the input sequences', 'Can handle multiple input sequences simultaneously']","['Requires significant computational resources for long input sequences', 'Sensitive to the choice of algorithmic parameters, such as the threshold for similarity', 'May not perform well on highly dissimilar or non-homogeneous input sequences', 'Has a high overhead due to the dynamic programming table', 'Limited applicability in cases where the LCS is not well-defined (e.g., non-contiguous subsequences)', 'Requires careful tuning of parameters for optimal performance']","['Text similarity analysis and plagiarism detection', 'Data compression and pattern recognition', 'Computational biology and genomics', 'Bioinformatics and protein sequence alignment', 'Data mining and knowledge discovery', 'Natural language processing and machine learning', 'Web search engines and information retrieval']","longest_common_subsequence(char *seq1, char *seq2, int m, int n){
+int dp[m + 1][n + 1];
+for (int i = 0; i <= m; i++) {
+ for (int j = 0; j <= n; j++) {
+ if (i == 0 || j == 0)
+dp[i][j] = 0;
+ else if (seq1[i - 1] == seq2[j - 1])
+dp[i][j] = dp[i - 1][j - 1] + 1;
+ else
+dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+ }
+}
+int lcs_len = dp[m][n];
+cprintf(""Longest common subsequence length: %d\n"", lcs_len);
+char *lcs = (char *)malloc((lcs_len + 1) * sizeof(char));
+lcs[lcs_len] = '\0';
+for (int i = m, j = n, k = lcs_len - 1; i > 0 && j > 0; ) {
+ if (seq1[i - 1] == seq2[j - 1]) {
+ lcs[k--] = seq1[i - 1];
+i--;j--;
+} else if (dp[i - 1][j] > dp[i][j - 1]) i--;else j--;
+}
+cprintf(""Longest common subsequence: %s\n"", lcs);
+free(lcs);
+return 0;
+}",[]
+Longest Increasing Subsequence,"['LIS problem', 'Increasing subsequence problem', 'Maximum increasing subsequence']",Algorithms,The longest increasing subsequence problem is a classic dynamic programming problem in which we are given a sequence of integers and asked to find the length of the longest subsequence that is strictly increasing.,"['Dynamic programming approach makes it efficient for large inputs', 'Can be solved in O(n^2) time complexity', 'Easy to implement and understand', 'Can be used to solve other related problems like Longest Decreasing Subsequence', 'Helpful in solving optimization problems where we need to find the optimal solution', 'Can be applied to various domains like finance, economics, etc.', 'Helps in understanding the concept of subsequence and its applications', 'Useful in finding the maximum value among a set of values', 'Can be used as a building block for more complex algorithms']","['Not suitable for problems with large input sizes due to high time complexity', 'Requires a lot of memory if done iteratively', 'Difficult to understand and implement for beginners', 'Does not work well when the input sequence has many duplicate elements', 'Can be slow for inputs with many repeated values', 'May not perform well on certain types of data like non-numerical or categorical data']","['Finding the longest increasing subsequence is useful in various applications such as finance, economics, etc.', 'Helps in optimizing problems where we need to find the optimal solution', 'Can be used in finding the maximum value among a set of values', 'Useful in solving optimization problems related to stock prices or asset prices', 'Helps in understanding and analyzing time series data', 'Can be applied to solve other related problems like Longest Decreasing Subsequence', 'Useful in various fields such as data science, machine learning, etc.', 'Can be used for predicting future values based on past trends']","int longestIncreasingSubsequence(int arr[], int n)
+{
+	int lis[n+1];
+	memset(lis, 0, sizeof(lis));
+	for (int i = 0; i < n; ++i) {
+		for (int j = 0; j < i; ++j)
+			if (arr[i] > arr[j])
+				lis[i+1] = max(lis[i+1], lis[j]+1);
+	}
+	return *max_element(lis, lis+n+1);
+}",[]
+Matrix Chain Multiplication,"['matrix chain multiplication problem', 'matrix multiplication algorithm', 'chain matrix product']",Algorithms,The Matrix Chain Multiplication problem is a dynamic programming problem where the goal is to find the most efficient way to multiply an array of matrices. It involves finding the optimal order in which to perform matrix multiplications to minimize the number of scalar multiplications.,"['Reduces the time complexity of matrix multiplication from O(n^3) to O(n^log2 n)', 'Minimizes the number of scalar multiplications required', 'Optimal solution for large-scale matrix multiplication problems', 'Efficient use of memory and computational resources', 'Scalable to handle large matrices', 'Can be used in various applications such as machine learning, computer vision, and data analysis']","['Requires a significant amount of memory to store the intermediate results', 'Computationally intensive due to the need for multiple recursive calls', 'Optimization techniques may not always produce the best result', 'Not suitable for real-time applications where speed is crucial', 'May require additional preprocessing steps to optimize performance']","['Machine learning: matrix chain multiplication can be used in neural networks, natural language processing, and other machine learning tasks', 'Computer vision: matrix multiplication is essential in image processing, object recognition, and 3D reconstruction', 'Data analysis: matrix multiplication is used in data compression, clustering, and dimensionality reduction', 'Scientific simulations: matrix chain multiplication can be applied to simulate complex systems such as weather forecasting and material science']","#include <stdio.h>
+#include <string.h>
+
+#define MAXN 1000
+#define INF 1e9
+
+int m, n;
+char mstr[MAXN][MAXN], s[MAXN];
+int memo[MAXN][MAXN];
+
+void print(int i, int j) {
+    if (i == j) return;
+    printf(""%s = %s * %s\n"", mstr[i][j], mstr[i][s[i]], mstr[s[i]+1][j]);
+}
+
+int chain(int a, int b) {
+    if (memo[a][b] != -1) return memo[a][b];
+    if (a == b) return 0;
+    int min = INF, p; 
+    for (p = a; p < b; p++) {
+        int cost = chain(a, p) + chain(p+1, b) + m*mstr[a-1][p]*mstr[p][b];
+        if (cost < min) min = cost;
+    }
+    memo[a][b] = min;
+    return min;
+}
+
+int main() {
+    scanf(""%d%d"", &m, &n);
+    int i, j, p;
+    for (i = 1; i <= m; i++) {
+        scanf(""%s"", mstr[i] + 1);
+        for (j = 1; j <= n; j++) {
+            scanf(""%d"", &mstr[i][j]);
+        }
+    }
+
+    memset(memo, -1, sizeof memo);
+
+    printf(""Minimum number of scalar multiplications: %d\n"", chain(1, m));
+
+    for (i = 1; i <= n; i++) {
+        s[i] = s[i-1];
+        while (s[i] < m && mstr[s[i]+1][i] != INF) {
+            s[i]++;
+        }
+    }
+
+    for (i = 1; i <= n; i++) {
+        print(1, i);
+    }
+    return 0;
+}",[]
+Kadane Algorithm,"['Maximum Subarray Problem', 'Maximum Contiguous Subarray Problem', 'Subarray with Maximum Sum']",Algorithms,"The Kadane algorithm is a dynamic programming algorithm that finds the maximum sum of a subarray within an array. It works by scanning the array and at each step, it decides whether to continue the current subarray or start a new one.","['Efficient time complexity: O(n), where n is the number of elements in the array', 'Simple implementation', 'Can be easily adapted for parallel processing', 'Handles arrays with both positive and negative numbers', 'Can find multiple subarrays with maximum sum']","['Not suitable for very large datasets due to memory requirements', 'May not perform well on arrays with many zeros or negative numbers', 'Does not handle floating-point numbers', 'Not suitable for finding the minimum subarray sum']","['Financial analysis: Finding maximum profits from stock prices', 'Bioinformatics: Identifying patterns in DNA sequences', 'Scientific computing: Finding maxima in datasets with noise', 'Machine learning: Feature extraction and selection', 'Data compression: Finding optimal coding schemes']","#include <stdio.h>
+#include <stdlib.h>
+
+int max_subarray_sum(int arr[], int n) {
+    if (n == 0)
+        return 0;
+
+    int max_so_far = -999999; // Initialize with minimum possible value
+    int max_ending_here = 0;
+
+    for (int i = 0; i < n; i++) {
+        max_ending_here += arr[i];
+        if (max_so_far < max_ending_here)
+            max_so_far = max_ending_here;
+        // If sum becomes negative, reset max_ending_here to zero
+        if (max_ending_here < 0)
+            max_ending_here = 0;
+    }
+    return max_so_far;
+}
+
+test() {
+    int arr[] = {1, -2, 3, -4, 5};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    printf(""Maximum subarray sum is %d\n"", max_subarray_sum(arr, n));
+}
+int main() {
+    test();
+    return 0;
+}","['The algorithm can be modified to find the minimum subarray sum by keeping track of the minimum sum so far and updating it at each step.', 'For arrays with many zeros or negative numbers, consider using a more efficient algorithm like the sliding window technique.', 'In cases where floating-point numbers are involved, use a variant of the algorithm that takes into account the precision of the numbers.']"
