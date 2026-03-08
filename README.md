@@ -27,19 +27,6 @@ Most AI-powered Q&A systems send every query to a large LLM regardless of comple
 
 ---
 
-## ⚡ Key Results
-
-| Metric | Baseline (LLM only) | Mindful Queries | Improvement |
-|---|---|---|---|
-| Latency (Academic) | 68.24s | 9.66s | **85.84% faster** |
-| Power Draw | 18W (8B model) | 6W (1.5B model) | **66.67% less** |
-| Energy per query | 1228.32 J | 57.96 J | **95.28% savings** |
-| Routing Accuracy | — | 92.3% | — |
-
-*Benchmarked on NVIDIA RTX 3050 4GB · Ollama inference engine*
-
----
-
 ## 🗂️ Project Structure
 
 ```
