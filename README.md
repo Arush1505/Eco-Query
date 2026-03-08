@@ -1,7 +1,7 @@
 # 🧠 Mindful Queries
 ### Energy-Aware Academic Query Routing using Small & Large Language Models
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)](https://streamlit.io)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-Inference%20API-yellow.svg)](https://huggingface.co)
 [![Research](https://img.shields.io/badge/Type-Research%20Project-green.svg)](#)
