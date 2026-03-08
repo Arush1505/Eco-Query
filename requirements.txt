@@ -5,3 +5,4 @@ thefuzz
 python-Levenshtein
 nltk
 openai
+dotenv
