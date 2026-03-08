@@ -9,6 +9,9 @@ import re
 import nltk
 from nltk.stem import WordNetLemmatizer
 from thefuzz import fuzz
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # ==============================
 # Page Config
@@ -28,8 +31,7 @@ KB_PATH   = "../knowledge_dataset_llm.csv"
 
 # ✏️ Paste your HuggingFace token here
 # Get it from: https://huggingface.co/settings/tokens
-HF_TOKEN = "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"
-
+HF_TOKEN = os.getenv("HF_TOKEN")
 HF_MODELS = {
     SLM_MODEL: "Qwen/Qwen2-1.5B-Instruct:featherless-ai",
     LLM_MODEL: "meta-llama/Llama-3.1-8B-Instruct:novita"
