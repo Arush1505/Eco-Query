@@ -27,7 +27,7 @@ st.set_page_config(
 # ==============================
 SLM_MODEL = "qwen2:1.5b"
 LLM_MODEL = "llama3.1:8b"
-KB_PATH   = "../knowledge_dataset_llm.csv"
+KB_PATH   = "knowledge_dataset_llm.csv"
 
 # ✏️ Paste your HuggingFace token here
 # Get it from: https://huggingface.co/settings/tokens
@@ -720,4 +720,3 @@ if st.button("🚀 Submit", type="primary", use_container_width=True):
             st.markdown(response)
 
 st.divider()
-st.caption("Mindful Queries — SRM Institute of Science and Technology")
