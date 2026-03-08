@@ -21,41 +21,9 @@ Most AI-powered Q&A systems send every query to a large LLM regardless of comple
 4. Routing validated academic queries → **SLM (Qwen2-1.5B)**
 5. Routing complex/mixed/non-academic queries → **LLM (Llama-3.1-8B)**
 
+
+**Note : All these metrics were tested on LOCAL GPU , on actual production servers they might vary. The cost of renting VM is high , so for demo purpose I used huggingFace API**
 ---
-
-## 🏗️ Architecture
-
-```
-User Query
-    │
-    ▼
-┌─────────────────────────┐
-│   Query Normalization   │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│   SLM Metadata          │  ← Qwen2-1.5B extracts
-│   Extraction            │    topic-intent pairs
-└────────────┬────────────┘
-             │
-      is_academic?
-       /         \
-     No           Yes
-      │             │
-      ▼             ▼
-   LLM Path    KB Validation
-  (Llama 8B)  (Fuzzy Matching)
-                   │
-          fully grounded?
-            /         \
-          No           Yes
-           │             │
-           ▼             ▼
-        LLM Path     SLM Path
-       (Llama 8B)  (Qwen2-1.5B)
-                   Response Synthesis
-```
 
 ---
 
@@ -136,33 +104,6 @@ Who won the FIFA World Cup in 2022?
 What is the best recipe for sourdough bread?
 ```
 
----
-
-## 🧩 How It Works
-
-### 1. Topic-Intent Pair Extraction
-Instead of extracting flat lists of topics and intents, the system extracts **paired mappings**:
-```json
-{
-  "queries": [
-    {"topic": "Binary Tree",  "intent": "advantages"},
-    {"topic": "Arrays",       "intent": "definition"}
-  ],
-  "is_academic": true
-}
-```
-This ensures each topic is answered with its **specific** requested intent only.
-
-### 2. Multi-Pass KB Validation
-Topics go through three passes:
-- **Pass 1:** Strong fuzzy match on heading/alias (threshold: 70)
-- **Pass 2:** Attribute token matching against validated rows
-- **Pass 3:** Lower-threshold extras-wide search (threshold: 60)
-
-### 3. Mixed Query Detection
-If any extracted topic cannot be grounded in the knowledge base, the entire query is routed to the LLM — preserving response quality.
-
----
 
 ## 🛠️ Tech Stack
 
@@ -171,45 +112,17 @@ If any extracted topic cannot be grounded in the knowledge base, the entire quer
 | Frontend | Streamlit |
 | SLM | Qwen2-1.5B-Instruct (via HuggingFace) |
 | LLM | Llama-3.1-8B-Instruct (via HuggingFace) |
-| Fuzzy Matching | thefuzz (Levenshtein distance) |
-| Text Normalization | NLTK WordNetLemmatizer |
 | Knowledge Base | Structured CSV |
 | API Client | OpenAI-compatible HuggingFace Router |
 
 ---
 
-## 📊 Knowledge Base
-
-The current KB covers core **Data Structures & Algorithms** concepts including:
-
-- Linear structures: Arrays, Linked Lists, Stacks, Queues
-- Trees: Binary Tree, BST, AVL Tree, Red-Black Tree, B-Tree
-- Graphs: BFS, DFS, Dijkstra's Algorithm
-- Sorting: Quick Sort, Merge Sort, Heap Sort
-- Hashing: Hash Maps, Collision handling
-
-Each entry contains: `definition · advantages · disadvantages · applications · code · extras`
-
-> ⚠️ The dataset is actively being expanded to cover more CS domains.
 
 ---
 
 ## 📄 Research Paper
 
-This project is based on the research paper:
-
-**"Mindful Queries: Leveraging Small Language Models for Invariant Data"**
-*Arush Jauhari, Mridangam Goswami, Dr. Prakash U M*
-*SRM Institute of Science and Technology, Chennai*
-
----
-
-## 🙋 Author
-
-**Arush Jauhari**
-- 🔗 [LinkedIn](https://www.linkedin.com/in/arush-jauhari-b350372a2/)
-- 🎓 SRM Institute of Science and Technology, Chennai
-
+This project is research based, not supposed to be production ready.
 ---
 
 ## ⚠️ Limitations
@@ -220,7 +133,3 @@ This project is based on the research paper:
 - Benchmark results were measured on local GPU — HF API latency differs
 
 ---
-
-## 📜 License
-
-This project is for academic and research purposes.
