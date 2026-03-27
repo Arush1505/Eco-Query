@@ -29,9 +29,10 @@ SLM_MODEL = "qwen2:1.5b"
 LLM_MODEL = "llama3.1:8b"
 KB_PATH   = "knowledge_dataset_llm.csv"
 
-# ✏️ Paste your HuggingFace token here
-# Get it from: https://huggingface.co/settings/tokens
+
 HF_TOKEN = os.getenv("HF_TOKEN")
+
+
 HF_MODELS = {
     SLM_MODEL: "Qwen/Qwen2-1.5B-Instruct:featherless-ai",
     LLM_MODEL: "meta-llama/Llama-3.1-8B-Instruct:novita"
@@ -445,13 +446,18 @@ def academic_router(query, kb_df):
 
         match = match_topic_fuzzy(kb_df, topic, threshold=FUZZY_THRESHOLD)
         if match and match["field"] in ("heading", "alias"):
+            print(f"Matched: {match['row']['heading']}")
+            print(f"Field: {match['field']}, Score: {match['score']}")
             validated_pairs.append({
                 "topic" : topic,
                 "intent": intent,
                 "row"   : match["row"]
             })
+            
+            
         else:
             non_kb_topics.append(topic)
+            print("No match found")
 
     # Second pass: attribute-like tokens
     validated_topics = [p["topic"] for p in validated_pairs]
@@ -551,27 +557,45 @@ def academic_router(query, kb_df):
             "intent": intent,
             "data"  : data_value
         })
+        
+        
+        print("\n===== FINAL DATA SENT TO MODEL =====")
+        print(json.dumps(topic_intent_data, indent=2))
 
-    synth_prompt = f"""
-    You are an academic assistant.  Present the answer in neat format for each topic.
+        synth_prompt = f"""
+        You are a STRICT academic response generator.
 
-    Question:
-    {query}
+        Your task is to produce answers ONLY from the provided data.
+        You are NOT allowed to add, infer, explain, or expand beyond it.
 
-    For each topic below, answer ONLY its paired intent using ONLY the provided data.
-    Do NOT mix intents across topics.
+        -----------------------------------
+        INPUT QUESTION:
+        {query}
+        -----------------------------------
 
-    Topic-Intent-Data:
-    {json.dumps(topic_intent_data, indent=2)}
+        TOPIC-INTENT-DATA:
+        {json.dumps(topic_intent_data, indent=2)}
 
-    Attached Attributes:
-    {attribute_validations}
+        ATTACHED ATTRIBUTES:
+        {attribute_validations}
 
-    Instructions:
-    - Answer each topic with its specific intent only
-    - Do not hallucinate information not present in the data
-    - Do not add extra information beyond what is asked
-    """
+        -----------------------------------
+        STRICT RULES (MANDATORY):
+        -----------------------------------
+        1. Answer ONLY what is explicitly requested in the intent.
+        2. Use ONLY the provided data. Do NOT use prior knowledge.
+        3. Do NOT add:
+        - explanations
+        - examples
+        - introductions
+        - conclusions
+        - transitions
+        4. Do NOT merge topics.
+        5. If data is missing or empty → output exactly: "Data not available".
+        6. Do NOT rephrase the question.
+        7. Do NOT generate any content outside the requested intent.
+
+        """
 
     format_start   = time.perf_counter()
     response       = call_ollama(SLM_MODEL, synth_prompt)
@@ -673,6 +697,8 @@ query = st.text_area(
     placeholder="e.g. What is a Binary Search Tree and what are its advantages?",
     height=100
 )
+
+
 
 if st.button("🚀 Submit", type="primary", use_container_width=True):
     if not query.strip():
