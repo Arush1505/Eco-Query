@@ -17,7 +17,7 @@ load_dotenv()
 # Page Config
 # ==============================
 st.set_page_config(
-    page_title="Mindful Queries",
+    page_title="Eco Queries",
     page_icon="🧠",
     layout="centered"
 )
@@ -612,7 +612,7 @@ def academic_router(query, kb_df):
 # ==============================
 # Streamlit UI
 # ==============================
-st.title("🧠 Mindful Queries")
+st.title("🧠 Eco Queries")
 st.caption("Energy-aware academic query routing · SLM (Qwen2) + LLM (Llama 3.1) via HuggingFace")
 
 # Sidebar
