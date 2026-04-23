@@ -1,4 +1,4 @@
-# 🧠 Mindful Queries
+# 🧠 Eco-Query
 ### Energy-Aware Academic Query Routing using Small & Large Language Models
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
@@ -14,7 +14,7 @@
 
 Most AI-powered Q&A systems send every query to a large LLM regardless of complexity. For academic domains like Data Structures and Algorithms, the majority of questions are **static, repetitive, and knowledge-based** — they don't require full LLM reasoning.
 
-**Mindful Queries** solves this by:
+**Eco-Query** solves this by:
 1. Classifying each query as academic or non-academic
 2. Extracting topic-intent pairs from the query
 3. Validating topics against a structured knowledge base
